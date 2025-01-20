@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>About Us</title>
+        <style>
+            body {
+                background-color: rgb(2, 21, 62);
+                margin: 0; 
+                height: 100vh; 
+                display: flex;
+                justify-content: center;
+                align-items: center; 
+            }
+            .container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center; 
+                align-items: center; 
+                flex-wrap: wrap;
+                gap: 30px;
+                max-width: 90%;
+            }
+            .item {
+                display: flex;
+                flex-direction: column; 
+                align-items: center; 
+                text-align: center;
+            }
+            .frame {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 10px; 
+            }
+            .frame img{
+                width: 100%;
+                height:100%;
+                object-fit: cover;
+                border-radius: 50%;
+                display: flex;
+            }
+            .text {
+                color: white;
+                font-size: 18px;
+            }
+            #back{   
+                position: fixed;
+                bottom: 10%;
+                right: 5%;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="item">
+                <div class="frame"><img src="./tey.jpg"></div>
+                <div class="text">Morm Somavotey</div>
+            </div>
+            <div class="item">
+                <div class="frame"><img src="./DSC_9495.jpg" alt=""></div>
+                <div class="text">Seang KimEng</div>
+            </div>
+            <div class="item">
+                <div class="frame"><img src="./soriya.jpg" alt=""></div>
+                <div class="text">Kong Soriya</div>
+            </div>
+            <div class="item">
+                <div class="frame"><img src="./rina.jpg" alt=""></div>
+                <div class="text">Pork Rina</div>
+            </div>
+            <div class="item">
+                <div class="frame"><img src="./sopor.jpg" alt=""></div>
+                <div class="text">Ros Sopor</div>
+            </div>
+            <footer id="back">
+                <a href="./index.html">Go_Back</a>
+            </footer>
+        </div>
+    </body>
+</html>
