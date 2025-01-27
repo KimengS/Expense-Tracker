@@ -1,312 +1,351 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Income and Expense Tracker</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
     <style>
-      body {
-        background-color: black;
-        color: white;
-        margin: 0;
-        font-family: Arial, sans-serif;
-        gap: 10px;
-      }
-
-      #heading {
-        color: white;
-        height: 70px;
-        background-color: gray;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 10;
-        text-align: left;
-      }
-
-      #greeting {
-        position: absolute;
-        margin-top: -65px;
-        margin-left: 5%;
-      }
-
-      #quote {
-        position: absolute;
-        margin-top: 7%;
-        margin-left: 5%;
-        margin-top: -20px;
-      }
-
-      .main-container {
-        display: grid;
-        grid-template-columns: 1fr 450px;
-        grid-template-rows: auto auto;
-        gap: 10px; 
-        margin-top: 150px;
-        padding: 20px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .tableinfo {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        background-color: hwb(0 20% 80%);
-        color: rgb(252, 252, 252);
-        padding: 30px;
-        border-radius: 10px;
-        
-      }
-
-      .smallborder {
-        background-color: rgb(74, 69, 69);
-        text-align: center;
-        padding: 10px;
-        border-radius: 5px;
-        max-height: 100px;
-      }
-
-      .form-container {
-        background-color: hwb(0 20% 80%);
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 20px;
-        margin-top: 20px;
-      }
-      .form-container input{
-        width: 100%;
-        height: 30px;
-        background-color: transparent;
-        outline: none;
-        border: 1px solid gray;
-        margin-bottom: 10px;
-        align-items: center;
-        
-      }
-      #submit {
-        height: 40px;
-        background-color: rgb(154, 44, 44);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin: 5px 0;
-        align-items: center;
-        margin-left:40%;
-      }
-
-      #submit:hover {
-        background-color: darkgray;
-        align-items: center;
-      }
-
-      #radio-container {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        
-      }
-      #radio-container button {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        padding: 20px 10px;
-        
-      }
-      #radio-container label {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        text-align: center;
-      }
-
-      .transaction-list {
-        grid-column: span 1;
-        background-color: hwb(0 20% 80%);
-        color: rgb(252, 252, 252);
-        padding: 20px;
-        border-radius: 10px;
-        max-height: 300px;
-        overflow-y: auto;
-        margin-top: 10px; 
-      }
-
-      .transaction-item {
-        display: flex;
-        justify-content: space-between;
-        background: #929090;
-        padding: 10px;
-        border-radius: 4px;
-        margin-bottom: 10px;
-        gap: 30px;
-      }
-
-      .transaction-item.income {
-        border-left: 20px solid #4caf50;
-      }
-
-      .transaction-item.expense {
-        border-left: 20px solid #e74c3c;
-      }
-
-      @media (max-width: 768px) {
-        .main-container {
-          grid-template-columns: 1fr;
-          grid-template-rows: auto;
+        body {
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .appbar {
+            color: white;
+            height: 70px;
+            background: linear-gradient(45deg, #811cec, #2575fc);
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 16px;
+            padding: 20px;
+            justify-content: space-between;
+        }
+        .left {
+            flex: 1 1 50%;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .right {
+            flex: 1 1 40%;
+            background-color: #e8faff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            max-height: fit-content;
+        }
+        #greeting {
+            margin-top: 0;
+        }
+        .balance {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .card-balance {
+            border-radius: 8px;
+            min-width: 150px;
+            flex: 1;
+            background-color: #ad9fbe;
+            padding: 10px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .form-balance {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .form-balance input {
+            width: 100%;
+            height: 30px;
+            background-color: transparent;
+            outline: none;
+            border: 1px solid gray;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        .form-balance button {
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            background-color: #2575fc;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-balance button:hover {
+            background-color: #1c63d8;
+        }
+        .transactiontype {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .List-transaction {
+            grid-column: span 1;
+            background-color: hwb(0 52% 27%);
+            color: rgb(252, 252, 252);
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px; 
+        }
+        .transaction {
+            display: flex;
+            background-color: rgb(46, 57, 53);
+            border-radius: 16px;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3px;
+            padding: 3px;
+            flex-wrap: wrap;
+        }
+        .transaction .front {
+            display: flex;
+            gap: 8px;
+        }
+        .transaction .middle {
+            flex: 1;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: 200px;
+        }
+        .transaction .end {
+            font-size: 12px;
+            color: gray;
+        }
+        #tag {
+            background-color: greenyellow;
+            padding: 8px 25px;
+            border-radius: 8px;
+        }
+        .font {
+            display: flex;
+            gap: 50px;
         }
 
-        .transaction-list {
-          grid-column: span 1;
+        @media (max-width: 768px) {
+            .main {
+                grid-template-columns: 2fr;
+                grid-template-rows: auto;
+            }
+            .left, .right {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .balance {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .card-balance {
+                min-width: auto;
+                width: 100%;
+            }
         }
-      }
 
-      #aboutus {
-        position: fixed;
-        bottom: 10%;
-        right: 5%;
-      }
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .info-input {
+            width: 48%;
+            height: 30px;
+            background-color: transparent;
+            outline: none;
+            border: 1px solid gray;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .amount-selection-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .amount-input {
+            width: 0%;
+        }
+
+        .select-box {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 40px;
+            border: 1px solid gray;
+        }
+
+        .date-input {
+            width: 100%; 
+            font-family: Arial, sans-serif;
+            flex: 1;
+        }
+        footer{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
     </style>
-  </head>
-  <body>
-    <div id="heading">
-      <h1>Expense Tracker</h1>
+</head>
+<body>
+    <div class="appbar">
+        <h1>Expense Tracker</h1>
     </div>
-    <div>
-      <h1 id="greeting"></h1>
-      <p id="quote">Being conscious of your costs is critical. Managing it well will help you achieve your dream.</p>
+    <div class="main">
+        <div class="left">
+            <h1 id="greeting">Good Night</h1>
+            <p>Being conscious of your costs is critical. Managing it well will help you achieve your dream.</p>
+            <div class="balance">
+                <div class="card-balance">
+                    <h5>Balance</h5>
+                    <h3 id="balance">$ 0</h3>
+                </div>
+                <div class="card-balance">
+                    <h5>Income</h5>
+                    <h3 id="income">$ 0</h3>
+                </div>
+                <div class="card-balance">
+                    <h5>Expense</h5>
+                    <h3 id="expense">$ 0</h3>
+                </div>
+            </div>
+            <div>   
+                <h3>Transactions</h3>
+                <div class="List-transaction" id="transactioncontainer"></div>
+            </div> 
+        </div>
+        <div class="right">
+            <form onsubmit="submitForm(event)" class="form-balance">
+                <div class="amount-selection-row">
+                    <input name="amount" type="number" required placeholder="Amount" class="info-input amount-input" />
+                    <div class="transactiontype">
+                        <select name="transactiontype" class="select-box" required>
+                            <option value="" disabled selected>Click Me</option>
+                            <option value="Income">Income </option>
+                            <option value="Expense">Expense</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <input name="information" type="text" required placeholder="Information" class="info-input" />
+                    <input name="date" type="date" required class="date-input" />
+                </div>
+                <input name="tag" type="text" required placeholder="Tag" class="info-input" />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-    <div class="main-container">
-      <!-- Table Section -->
-      <div class="tableinfo">
-        <div class="smallborder">
-          <h3>Balance</h3>
-          <p id="balance">&#36;0</p>
-        </div>
-        <div class="smallborder">
-          <h3>Income</h3>
-          <p id="income">&#36;0</p>
-        </div>
-        <div class="smallborder">
-          <h3>Expense</h3>
-          <p id="expense">&#36;0</p>
-        </div>
-      </div>
-
-      <!-- Form Section -->
-      <div class="form-container">
-        <form id="expenseForm">
-          <input type="text" id="amount" placeholder="Amount (e.g., 500)" required />
-          <div id="radio-container">
-            <label>
-              <input type="radio" name="tag" value="Income" required />
-              Income
-            </label>
-            <label>
-              <input type="radio" name="tag" value="Expense" required />
-              Expense
-            </label>
-          </div>
-          <input type="date" id="date" required />
-          <input type="text" id="information" placeholder="Information (e.g., utility, salary)" required />
-          <button type="submit" id="submit">Submit</button>
-        </form>
-      </div>
-
-      <!-- Transactions Section -->
-      <div class="transaction-list" id="transactionList">
-        <h3>Transactions</h3>
-      </div>
-    </div>
-
-    <footer id="aboutus">
-      <a href="./about_us.html">About Us</a>
+    <footer>
+        <a href="./about_us.html">About_Us</a>
     </footer>
 
     <script>
-      const balanceElement = document.getElementById("balance");
-      const incomeElement = document.getElementById("income");
-      const expenseElement = document.getElementById("expense");
-      const transactionList = document.getElementById("transactionList");
-      const form = document.getElementById("expenseForm");
+        const transactionContainer = document.getElementById("transactioncontainer");
+        const balanceDisplay = document.getElementById("balance");
+        const incomeDisplay = document.getElementById("income");
+        const expenseDisplay = document.getElementById("expense");
 
-      let balance = 0;
-      let totalIncome = 0;
-      let totalExpense = 0;
-
-      function greeting() {
+        let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+       
+        function displayGreeting() {
         const now = new Date();
         const hours = now.getHours();
-        let greeting;
-        if (hours >= 5 && hours < 12) greeting = "Good Morning!";
-        else if (hours >= 12 && hours < 17) greeting = "Good Afternoon!";
-        else if (hours >= 17 && hours < 21) greeting = "Good Evening!";
-        else greeting = "Good Night!";
-        document.getElementById("greeting").innerText = greeting;
-      }
-
-      window.addEventListener("load", () => {
-        greeting();
-        const savedData = JSON.parse(localStorage.getItem("expenseTrackerData"));
-        if (savedData) {
-          balance = savedData.balance;
-          totalIncome = savedData.totalIncome;
-          totalExpense = savedData.totalExpense;
-          updateUI();
-
-          if (savedData.transactions) {
-            savedData.transactions.forEach((transaction) => {
-              addTransaction(transaction.amount, transaction.date, transaction.information, transaction.tag, false);
-            });
-          }
+        let greetingText = "";
+        if (hours >= 5 && hours < 12) {
+            greetingText = "Good Morning!";
+         } else if (hours >= 12 && hours < 17) {
+            greetingText = "Good Afternoon!";
+        } else if (hours >= 17 && hours < 21) {
+            greetingText = "Good Evening!";
+        } else {
+            greetingText = "Good Night!";
         }
-      });
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const amount = parseFloat(document.getElementById("amount").value.trim());
-        const date = document.getElementById("date").value.trim();
-        const information = document.getElementById("information").value.trim();
-        const tag = document.querySelector("input[name='tag']:checked").value;
-
-        if (isNaN(amount) || amount <= 0) {
-          alert("Please enter a valid amount greater than 0.");
-          return;
+        const greetingElement = document.getElementById("greeting");
+        if (greetingElement) {
+            greetingElement.innerText = greetingText;
+         }
+        }
+        window.addEventListener("load", displayGreeting);
+        
+        function saveToLocalStorage() {
+            localStorage.setItem("transactions", JSON.stringify(transactions));
         }
 
-        if (tag === "Income") {
-          totalIncome += amount;
-          balance += amount;
-        } else if (tag === "Expense") {
-          totalExpense += amount;
-          balance -= amount;
+        function calculateBalance() {
+            const income = transactions
+                .filter(tx => tx.type === "Income")
+                .reduce((sum, tx) => sum + tx.amount, 0);
+            const expense = transactions
+                .filter(tx => tx.type === "Expense")
+                .reduce((sum, tx) => sum + tx.amount, 0);
+            const balance = income - expense;
+
+            balanceDisplay.textContent = `$ ${balance}`;
+            incomeDisplay.textContent = `$ ${income}`;
+            expenseDisplay.textContent = `$ ${expense}`;
         }
 
-        addTransaction(amount, date, information, tag);
-        updateUI();
-        form.reset();
-      });
+        function displayTransactions() {
+        transactionContainer.innerHTML = "";
+        transactions.forEach(transaction => {
+        const icon = transaction.type === "Income" ? "./UP.png" : "./down.png";
+        const backgroundColor = transaction.type === "Income" ? "green" : "red";
+        
+        const tagColor = transaction.type === "Income" ? "green" : "red";
 
-      function updateUI() {
-        balanceElement.innerHTML = `&#36;${balance}`;
-        incomeElement.innerHTML = `&#36;${totalIncome}`;
-        expenseElement.innerHTML = `&#36;${totalExpense}`;
-      }
-
-      function addTransaction(amount, date, information, tag) {
-        const transactionItem = document.createElement("div");
-        transactionItem.className = `transaction-item ${tag.toLowerCase()}`;
-        transactionItem.innerHTML = `
-          <span>${tag}: &#36;${amount}</span>
-          <span>${information}</span>
-          <span>${date}</span>
+        transactionContainer.innerHTML += `
+            <div class="transaction">
+                <div class="front">
+                    <img src="${icon}" alt="${transaction.type}" />
+                    <p>$${transaction.amount}</p>
+                </div>
+                <div class="middle">
+                    <p>${transaction.information}</p>
+                    <p id="tag" style="background-color: ${tagColor};">${transaction.tag}</p>
+                </div>
+                <div class="end">${transaction.date}</div>
+            </div>
         `;
-        transactionList.appendChild(transactionItem);
-      }
+    });
+    calculateBalance();
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+
+            transactions.unshift({
+                amount: Number(form.amount.value),
+                type: form.transactiontype.value,
+                information: form.information.value,
+                tag: form.tag.value,
+                date: form.date.value,
+                
+            });
+
+            saveToLocalStorage();
+            displayTransactions();
+            form.reset();
+        }
+
+        displayTransactions();
     </script>
-  </body>
+</body>
 </html>
