@@ -21,16 +21,23 @@
             justify-content: center;
             align-items: center;
         }
+        .appbar:hover {
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+                    transform: translateY(-2px);
+        }
         .main {
             display: flex;
             flex-wrap: wrap;
             margin-top: 20px;
-            gap: 16px;
+            margin-bottom: 10px;
+            gap: 30px;
             padding: 20px;
-            justify-content: space-between;
+            justify-content: space-between  ;
+            width: 90%;
         }
         .left {
-            flex: 1 1 50%;
+            flex: 1 1 60%;
             background-color: #f2f2f2;
             padding: 20px;
             border-radius: 8px;
@@ -38,10 +45,10 @@
             flex-direction: column;
         }
         .right {
-            flex: 1 1 40%;
-            background-color: #e8faff;
+            flex: 1 1 30%;
+            background-color: #cacbf5;
             border-radius: 8px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             max-height: fit-content;
         }
@@ -67,6 +74,7 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
+            flex: 1;
         }
         .form-balance input {
             width: 100%;
@@ -78,16 +86,21 @@
             padding: 5px;
         }
         .form-balance button {
+            height: 45px;
             width: 100%;
-            padding: 10px 20px;
-            border: none;
-            background-color: #2575fc;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
             color: white;
-            border-radius: 4px;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            
         }
         .form-balance button:hover {
-            background-color: #1c63d8;
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
         }
         .transactiontype {
             display: flex;
@@ -97,7 +110,7 @@
         }
         .List-transaction {
             grid-column: span 1;
-            background-color: hwb(0 52% 27%);
+            background-color: hwb(249 40% 2%);
             color: rgb(252, 252, 252);
             padding: 20px;
             border-radius: 10px;
@@ -112,12 +125,13 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 3px;
-            padding: 3px;
-            flex-wrap: wrap;
+            padding: 2px;
+            flex-wrap: wrap-reverse;
         }
         .transaction .front {
             display: flex;
             gap: 8px;
+            align-items: center;
         }
         .transaction .middle {
             flex: 1;
@@ -138,6 +152,13 @@
         .font {
             display: flex;
             gap: 50px;
+        }
+        .delete-icon {
+            cursor: pointer;
+            display: none;
+        }
+        .transaction:hover .delete-icon {
+            display: block;
         }
 
         @media (max-width: 768px) {
@@ -171,13 +192,13 @@
             background-color: transparent;
             outline: none;
             border: 1px solid gray;
-            border-radius: 4px;
-            padding: 5px;
+            border-radius: 10px;
+            padding: px;
         }
 
         .amount-selection-row {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             margin-top: 10px;
         }
         .amount-input {
@@ -185,11 +206,14 @@
         }
 
         .select-box {
-            width: 100%;
+            width: 50%;
             padding: 10px;
             font-size: 16px;
             border-radius: 40px;
-            border: 1px solid gray;
+            border: 1px solid rgb(53, 31, 31);
+            flex: 1;
+            background-color: #010101;
+            color: white;
         }
 
         .date-input {
@@ -261,33 +285,34 @@
         const balanceDisplay = document.getElementById("balance");
         const incomeDisplay = document.getElementById("income");
         const expenseDisplay = document.getElementById("expense");
-
+    
         let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
        
         function displayGreeting() {
-        const now = new Date();
-        const hours = now.getHours();
-        let greetingText = "";
-        if (hours >= 5 && hours < 12) {
-            greetingText = "Good Morning!";
-         } else if (hours >= 12 && hours < 17) {
-            greetingText = "Good Afternoon!";
-        } else if (hours >= 17 && hours < 21) {
-            greetingText = "Good Evening!";
-        } else {
-            greetingText = "Good Night!";
+            const now = new Date();
+            const hours = now.getHours();
+            let greetingText = "";
+            if (hours >= 5 && hours < 12) {
+                greetingText = "Good Morning!";
+             } else if (hours >= 12 && hours < 17) {
+                greetingText = "Good Afternoon!";
+            } else if (hours >= 17 && hours < 21) {
+                greetingText = "Good Evening!";
+            } else {
+                greetingText = "Good Night!";
+            }
+            const greetingElement = document.getElementById("greeting");
+            if (greetingElement) {
+                greetingElement.innerText = greetingText;
+             }
         }
-        const greetingElement = document.getElementById("greeting");
-        if (greetingElement) {
-            greetingElement.innerText = greetingText;
-         }
-        }
+    
         window.addEventListener("load", displayGreeting);
-        
+    
         function saveToLocalStorage() {
             localStorage.setItem("transactions", JSON.stringify(transactions));
         }
-
+    
         function calculateBalance() {
             const income = transactions
                 .filter(tx => tx.type === "Income")
@@ -296,56 +321,76 @@
                 .filter(tx => tx.type === "Expense")
                 .reduce((sum, tx) => sum + tx.amount, 0);
             const balance = income - expense;
-
+    
             balanceDisplay.textContent = `$ ${balance}`;
             incomeDisplay.textContent = `$ ${income}`;
             expenseDisplay.textContent = `$ ${expense}`;
         }
-
+    
         function displayTransactions() {
-        transactionContainer.innerHTML = "";
-        transactions.forEach(transaction => {
-        const icon = transaction.type === "Income" ? "./UP.png" : "./down.png";
-        const backgroundColor = transaction.type === "Income" ? "green" : "red";
-        
-        const tagColor = transaction.type === "Income" ? "green" : "red";
-
-        transactionContainer.innerHTML += `
-            <div class="transaction">
-                <div class="front">
-                    <img src="${icon}" alt="${transaction.type}" />
-                    <p>$${transaction.amount}</p>
-                </div>
-                <div class="middle">
-                    <p>${transaction.information}</p>
-                    <p id="tag" style="background-color: ${tagColor};">${transaction.tag}</p>
-                </div>
-                <div class="end">${transaction.date}</div>
-            </div>
-        `;
-    });
-    calculateBalance();
+            transactionContainer.innerHTML = "";
+            transactions.forEach((transaction, index) => {
+                const icon = transaction.type === "Income" ? "UP.png" : "down.png";
+                const backgroundColor = transaction.type === "Income" ? "green" : "red";
+                
+                const tagColor = transaction.type === "Income" ? "green" : "red";
+    
+                transactionContainer.innerHTML += `
+                    <div class="transaction" data-index="${index}">
+                        <div class="front">
+                            <img src="${icon}" alt="${transaction.type}" width="24px" height="24px" />
+                            <p>$${transaction.amount}</p>
+                        </div>
+                        <div class="middle">
+                            <p>${transaction.information}</p>
+                            <p id="tag" style="background-color: ${tagColor};">${transaction.tag}</p>
+                        </div>
+                        <div class="end">${transaction.date}</div>
+                        <img class="delete-icon" src="delete.jpg" alt="Delete" width="24px" height="24px"/>
+                    </div>
+                `;
+            });
+    
+            // Add event listeners to the delete icons
+            const deleteIcons = document.querySelectorAll(".delete-icon");
+            deleteIcons.forEach(icon => {
+                icon.addEventListener("click", function(event) {
+                    const transactionElement = event.target.closest(".transaction");
+                    const index = transactionElement.dataset.index;
+    
+                    // Remove transaction from the array
+                    transactions.splice(index, 1);
+    
+                    // Save the updated array to localStorage
+                    saveToLocalStorage();
+    
+                    // Re-render the transactions list
+                    displayTransactions();
+                });
+            });
+    
+            calculateBalance();
         }
-
+    
         function submitForm(event) {
             event.preventDefault();
             const form = event.target;
-
+    
             transactions.unshift({
                 amount: Number(form.amount.value),
                 type: form.transactiontype.value,
                 information: form.information.value,
                 tag: form.tag.value,
                 date: form.date.value,
-                
             });
-
+    
             saveToLocalStorage();
             displayTransactions();
             form.reset();
         }
-
+    
         displayTransactions();
     </script>
+    
 </body>
 </html>
