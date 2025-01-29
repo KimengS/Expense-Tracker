@@ -28,16 +28,17 @@
         }
         .main {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: row;
             margin-top: 20px;
             margin-bottom: 10px;
+            margin-right: 50px;
             gap: 30px;
             padding: 20px;
             justify-content: space-between  ;
             width: 90%;
         }
         .left {
-            flex: 1 1 60%;
+        
             background-color: #f2f2f2;
             padding: 20px;
             border-radius: 8px;
@@ -45,11 +46,7 @@
             flex-direction: column;
         }
         .right {
-            flex: 1 1 30%;
-            background-color: #cacbf5;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+           
             max-height: fit-content;
         }
         #greeting {
@@ -75,6 +72,10 @@
             flex-direction: column;
             gap: 16px;
             flex: 1;
+            background-color: #cacbf5;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
         .form-balance input {
             width: 100%;
@@ -87,7 +88,7 @@
         }
         .form-balance button {
             height: 45px;
-            width: 100%;
+            width: 150px;
             background: linear-gradient(45deg, #6a11cb, #2575fc);
             color: white;
             border: none;
@@ -95,6 +96,7 @@
             cursor: pointer;
             font-size: 16px;
             transition: transform 0.2s, box-shadow 0.2s;
+            align-self: center;
             
         }
         .form-balance button:hover {
@@ -114,7 +116,7 @@
             color: rgb(252, 252, 252);
             padding: 20px;
             border-radius: 10px;
-            max-height: 200px;
+            max-height: 500px;
             overflow-y: auto;
             margin-top: 10px; 
         }
@@ -138,7 +140,7 @@
             display: flex;
             gap: 8px;
             align-items: center;
-            margin-left: 200px;
+            margin-left: 100px;
         }
         .transaction .end {
             font-size: 12px;
@@ -163,17 +165,9 @@
 
         @media (max-width: 768px) {
             .main {
-                grid-template-columns: 2fr;
-                grid-template-rows: auto;
+                flex-direction: column;
             }
-            .left, .right {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-            }
-            .balance {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-            }
+           
             .card-balance {
                 min-width: auto;
                 width: 100%;
@@ -221,10 +215,12 @@
             font-family: Arial, sans-serif;
             flex: 1;
         }
-        footer{
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
+        .monthly{
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+
         }
     </style>
 </head>
@@ -274,12 +270,23 @@
                 <input name="tag" type="text" required placeholder="Tag" class="info-input" />
                 <button type="submit">Submit</button>
             </form>
+            <div class="monthly">
+                <div class="card-balance">
+                    <h5>Balance</h5>
+                    <h3 id="balance">$ 0</h3>
+                </div>
+                <div class="card-balance">
+                    <h5>Income</h5>
+                    <h3 id="income">$ 0</h3>
+                </div>
+                <div class="card-balance">
+                    <h5>Expense</h5>
+                    <h3 id="expense">$ 0</h3>
+                </div>
+            </div>
         </div>
     </div>
-    <footer>
-        <a href="./about_us.html">About_Us</a>
-    </footer>
-    <img src="" alt="">
+    
     <script>
         const transactionContainer = document.getElementById("transactioncontainer");
         const balanceDisplay = document.getElementById("balance");
@@ -330,7 +337,7 @@
         function displayTransactions() {
             transactionContainer.innerHTML = "";
             transactions.forEach((transaction, index) => {
-                const icon = transaction.type === "Income" ? "UP.png" : "down.png";
+                const icon = transaction.type === "Income" ? "Final/image/UP.png" : "Final/image/down.png";
                 const backgroundColor = transaction.type === "Income" ? "green" : "red";
                 
                 const tagColor = transaction.type === "Income" ? "green" : "red";
@@ -346,7 +353,7 @@
                             <p id="tag" style="background-color: ${tagColor};">${transaction.tag}</p>
                         </div>
                         <div class="end">${transaction.date}</div>
-                        <img class="delete-icon" src="./delete.png" alt="Delete" width="24px" height="24px"/>
+                        <img class="delete-icon" src="Final/image/delete.png" alt="Delete" width="24px" height="24px"/>
                     </div>
                 `;
             });
