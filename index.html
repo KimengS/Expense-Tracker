@@ -245,7 +245,30 @@
             text-decoration: underline;
             text-decoration-color: red;
         }
-        
+        #resetModal{ 
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 20px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+            text-align: center; 
+            border-radius: 10px;
+        }
+        #resetModal, #confirmResetModal {
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 20px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+            text-align: center; 
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -297,7 +320,7 @@
             </form>
             <div class="monthly">
                 <div class="more">
-                    <a href="./about_us.html">Description</a>
+                    <a href="./description.html">Description</a>
                 </div>
                 <div class="more">
                     <button id="resetButton"​>Reset</button>
@@ -309,12 +332,16 @@
             </div>
         </div>
     </div>
-    <div id="resetModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-     background: rgba(255, 255, 255, 0.9); padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); text-align: center; border-radius: 10px;">
-        <p>Are you sure you want to reset all data?</p>
-        <p style="color: red;">After you click "OK", you will lose your data forever.</p>
-        <button id="confirmReset">OK</button>
-        <button id="cancelReset">Cancel</button>
+    <div id="resetModal">
+        <p>Do you want to reset your input?</p>
+        <button id="confirmFirstReset">Yes</button>
+        <button id="cancelReset">No</button>
+    </div>
+    <div id="confirmResetModal">
+        <p>Are you sure?</p>
+        <p style="color: red;">You will lose your data, and you cannot restore it back.</p>
+        <button id="confirmFinalReset">Yes</button>
+        <button id="cancelFinalReset">No</button>
     </div>
 
     
@@ -443,9 +470,41 @@
             displayTransactions();
             resetModal.style.display = "none";
         });
-    });
+        });
 
-        
+        function setupResetModal() {
+            const elements = {
+                resetButton: document.getElementById("resetButton"),
+                resetModal: document.getElementById("resetModal"),
+                confirmResetModal: document.getElementById("confirmResetModal"),
+                confirmFirstReset: document.getElementById("confirmFirstReset"),
+                confirmFinalReset: document.getElementById("confirmFinalReset"),
+                cancelReset: document.getElementById("cancelReset"),
+                cancelFinalReset: document.getElementById("cancelFinalReset"),
+            };
+
+            function toggleModal(modal, show) {
+                elements[modal].style.display = show ? "block" : "none";
+            }
+
+            function resetTransactions() {
+                localStorage.setItem("transactions", JSON.stringify([]));
+                location.reload();
+            }
+
+            elements.resetButton.addEventListener("click", () => toggleModal("resetModal", true));
+            elements.cancelReset.addEventListener("click", () => toggleModal("resetModal", false));
+            elements.confirmFirstReset.addEventListener("click", () => {
+                toggleModal("resetModal", false);
+                toggleModal("confirmResetModal", true);
+            });
+            elements.cancelFinalReset.addEventListener("click", () => toggleModal("confirmResetModal", false));
+            elements.confirmFinalReset.addEventListener("click", resetTransactions);
+        }
+
+       
+        document.addEventListener("DOMContentLoaded", setupResetModal);
+
     </script>
     
 </body>
