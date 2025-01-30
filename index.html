@@ -209,6 +209,9 @@
             background-color: #010101;
             color: white;
         }
+        .select-box option:first-child {
+            font-size: 10px;
+        }
 
         .date-input {
             width: 100%; 
@@ -222,11 +225,33 @@
             gap: 8px;
 
         }
+        .more {
+            border-radius: 8px;
+            min-width: 150px;
+            flex: 1;
+            background-color: #ad9fbe;
+            padding: 10px;
+            text-align: center;
+            box-sizing: border-box;
+            display: flex;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+        #resetButton{
+            border: none;
+            color: rgb(5, 5, 5);
+            background-color: transparent;
+            text-decoration: underline;
+            text-decoration-color: red;
+        }
+        
     </style>
 </head>
 <body>
     <div class="appbar">
         <h1>Expense Tracker</h1>
+        
     </div>
     <div class="main">
         <div class="left">
@@ -258,8 +283,8 @@
                     <div class="transactiontype">
                         <select name="transactiontype" class="select-box" required>
                             <option value="" disabled selected>Click Me</option>
-                            <option value="Income">Income </option>
-                            <option value="Expense">Expense</option>
+                            <option value="Income" style="color: rgb(5, 150, 5);">Income </option>
+                            <option value="Expense" style="color: red;">Expense</option>
                         </select>
                     </div>
                 </div>
@@ -271,21 +296,27 @@
                 <button type="submit">Submit</button>
             </form>
             <div class="monthly">
-                <div class="card-balance">
-                    <h5>Balance</h5>
-                    <h3 id="balance">$ 0</h3>
+                <div class="more">
+                    <a href="./about_us.html">Description</a>
                 </div>
-                <div class="card-balance">
-                    <h5>Income</h5>
-                    <h3 id="income">$ 0</h3>
+                <div class="more">
+                    <button id="resetButton"​>Reset</button>
                 </div>
-                <div class="card-balance">
-                    <h5>Expense</h5>
-                    <h3 id="expense">$ 0</h3>
+                
+                <div class="more">
+                    <a href="./about_us.html">About Us</a>
                 </div>
             </div>
         </div>
     </div>
+    <div id="resetModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+     background: rgba(255, 255, 255, 0.9); padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); text-align: center; border-radius: 10px;">
+        <p>Are you sure you want to reset all data?</p>
+        <p style="color: red;">After you click "OK", you will lose your data forever.</p>
+        <button id="confirmReset">OK</button>
+        <button id="cancelReset">Cancel</button>
+    </div>
+
     
     <script>
         const transactionContainer = document.getElementById("transactioncontainer");
@@ -337,7 +368,7 @@
         function displayTransactions() {
             transactionContainer.innerHTML = "";
             transactions.forEach((transaction, index) => {
-                const icon = transaction.type === "Income" ? "Final/image/UP.png" : "Final/image/down.png";
+                const icon = transaction.type === "Income" ? "UP.png" : "down.png";
                 const backgroundColor = transaction.type === "Income" ? "green" : "red";
                 
                 const tagColor = transaction.type === "Income" ? "green" : "red";
@@ -353,25 +384,21 @@
                             <p id="tag" style="background-color: ${tagColor};">${transaction.tag}</p>
                         </div>
                         <div class="end">${transaction.date}</div>
-                        <img class="delete-icon" src="Final/image/delete.png" alt="Delete" width="24px" height="24px"/>
+                        <img class="delete-icon" src="delete.png" alt="Delete" width="24px" height="24px"/>
                     </div>
                 `;
             });
     
-            // Add event listeners to the delete icons
+            
             const deleteIcons = document.querySelectorAll(".delete-icon");
             deleteIcons.forEach(icon => {
                 icon.addEventListener("click", function(event) {
                     const transactionElement = event.target.closest(".transaction");
                     const index = transactionElement.dataset.index;
     
-                    // Remove transaction from the array
                     transactions.splice(index, 1);
-    
-                    // Save the updated array to localStorage
                     saveToLocalStorage();
     
-                    // Re-render the transactions list
                     displayTransactions();
                 });
             });
@@ -395,8 +422,30 @@
             displayTransactions();
             form.reset();
         }
-    
-        displayTransactions();
+        
+        document.addEventListener("DOMContentLoaded", function () {
+        const resetButton = document.getElementById("resetButton");
+        const resetModal = document.getElementById("resetModal");
+        const confirmReset = document.getElementById("confirmReset");
+        const cancelReset = document.getElementById("cancelReset");
+
+        resetButton.addEventListener("click", function () {
+            resetModal.style.display = "block";
+        });
+
+        cancelReset.addEventListener("click", function () {
+            resetModal.style.display = "none";
+        });
+
+        confirmReset.addEventListener("click", function () {
+            transactions = [];  
+            saveToLocalStorage();
+            displayTransactions();
+            resetModal.style.display = "none";
+        });
+    });
+
+        
     </script>
     
 </body>
