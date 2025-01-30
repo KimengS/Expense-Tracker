@@ -168,7 +168,7 @@
                 flex-direction: column;
             }
            
-            .card-balance {
+            .card-balance .more{
                 min-width: auto;
                 width: 100%;
             }
@@ -218,15 +218,13 @@
             font-family: Arial, sans-serif;
             flex: 1;
         }
-        .monthly{
-            margin-top: 16px;
+       .add{
             display: flex;
-            justify-content: center;
-            gap: 8px;
-
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
         .more {
-            display: flex;
             height: 100px;
             justify-content: center;
             align-items: center;
@@ -236,6 +234,7 @@
             padding: 10px;
             text-align: center;
             box-sizing: border-box;
+            display: flex;
         }
         #resetButton{
             border: none;
@@ -268,6 +267,7 @@
             text-align: center; 
             border-radius: 10px;
         }
+        
     </style>
 </head>
 <body>
@@ -317,7 +317,7 @@
                 <input name="tag" type="text" required placeholder="Tag" class="info-input" />
                 <button type="submit">Submit</button>
             </form>
-            <div class="balance">
+            <div class="add">
                 <div class="more">
                     <a href="./description.html">Description</a>
                 </div>
