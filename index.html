@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     <style>
-        /* Basic page styling */
+        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -17,7 +17,6 @@
             overflow: hidden;
         }
 
-        /* Welcome message styling */
         .welcome-message {
             font-size: 30px;
             color: #2004d6;
@@ -26,34 +25,20 @@
             animation: fadeIn 2s ease-out forwards, moveUp 2s ease-out forwards;
         }
 
-        /* Fade-in animation */
+        
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
-        /* Slide up animation */
         @keyframes moveUp {
-            0% {
-                transform: translateY(50px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+            0% { transform: translateY(50px); }
+            100% { transform: translateY(0); }
         }
 
-        /* Fade-out animation on page redirect */
         @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
@@ -63,16 +48,15 @@
     </div>
 
     <script>
-        // Show welcome message and animation for 4 seconds
-        setTimeout(function() {
-            // Apply fade-out animation before redirecting
+        
+        setTimeout(() => {
             document.querySelector('.welcome-message').style.animation = "fadeOut 1s forwards";
             
-            // Redirect after the fade-out animation
-            setTimeout(function() {
-                window.location.href = "core.html";  // Replace with your app URL
-            }, 1000); // 1 second delay for fade-out animation to complete
-        }, 4000); // Show the message for 4 seconds before transitioning
+            
+            setTimeout(() => {
+                window.location.href = "core.html";
+            }, 1000); 
+        }, 4000); 
     </script>
 </body>
 </html>

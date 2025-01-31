@@ -60,12 +60,14 @@
         }
         .card-balance {
             border-radius: 8px;
-            min-width: 150px;
             flex: 1;
             background-color: #ad9fbe;
             padding: 10px;
             text-align: center;
             box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            
         }
         .form-balance {
             display: flex;
@@ -273,9 +275,9 @@
     </style>
 </head>
 <body>
-    
-        <div class="appbar">
+    <div class="appbar">
         <h1>Expense Tracker</h1>
+        
     </div>
     <div class="main">
         <div class="left">
@@ -301,7 +303,7 @@
             </div> 
         </div>
         <div class="right">
-            <form id="transactionForm" class="form-balance">
+            <form onsubmit="submitForm(event)" class="form-balance">
                 <div class="amount-selection-row">
                     <input name="amount" type="number" required placeholder="Amount" class="info-input amount-input" />
                     <div class="transactiontype">
@@ -326,28 +328,26 @@
                 <div class="more">
                     <button id="resetButton"​>Reset</button>
                 </div>
+                
                 <div class="more">
                     <a href="./about_us.html">About Us</a>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div id="resetModal" style="display:none;">
+    <div id="resetModal">
         <p>Do you want to reset your input?</p>
         <button id="confirmFirstReset">Yes</button>
         <button id="cancelReset">No</button>
     </div>
-
-   
-    <div id="confirmResetModal" style="display:none;">
+    <div id="confirmResetModal">
         <p>Are you sure?</p>
         <p style="color: red;">You will lose your data, and you cannot restore it back.</p>
         <button id="confirmFinalReset">Yes</button>
         <button id="cancelFinalReset">No</button>
     </div>
 
-
+    
     <script>
         const transactionContainer = document.getElementById("transactioncontainer");
         const balanceDisplay = document.getElementById("balance");
@@ -355,6 +355,7 @@
         const expenseDisplay = document.getElementById("expense");
     
         let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+        displayTransactions();
        
         function displayGreeting() {
             const now = new Date();
@@ -378,8 +379,13 @@
         window.addEventListener("load", displayGreeting);
     
         function saveToLocalStorage() {
-            localStorage.setItem("transactions", JSON.stringify(transactions));
-        }
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
+        // Ensure transactions are displayed when page loads
+        window.addEventListener("load", () => { 
+    displayTransactions();
+});
     
         function calculateBalance() {
             const income = transactions
@@ -419,6 +425,7 @@
                 `;
             });
     
+            
             const deleteIcons = document.querySelectorAll(".delete-icon");
             deleteIcons.forEach(icon => {
                 icon.addEventListener("click", function(event) {
@@ -436,7 +443,7 @@
         }
     
         function submitForm(event) {
-            event.preventDefault();  
+            event.preventDefault();
             const form = event.target;
     
             transactions.unshift({
@@ -452,42 +459,27 @@
             form.reset();
         }
         
-        document.getElementById("transactionForm").addEventListener("submit", submitForm);
-
         document.addEventListener("DOMContentLoaded", function () {
-            const resetButton = document.getElementById("resetButton");
-            const resetModal = document.getElementById("resetModal");
-            const confirmReset = document.getElementById("confirmFirstReset");
-            const cancelReset = document.getElementById("cancelReset");
-            const confirmFinalReset = document.getElementById("confirmFinalReset");
-            const cancelFinalReset = document.getElementById("cancelFinalReset");
+        const resetButton = document.getElementById("resetButton");
+        const resetModal = document.getElementById("resetModal");
+        const confirmReset = document.getElementById("confirmReset");
+        const cancelReset = document.getElementById("cancelReset");
 
-            resetButton.addEventListener("click", function () {
-                resetModal.style.display = "block"; 
-            });
-
-            cancelReset.addEventListener("click", function () {
-                resetModal.style.display = "none"; 
-            });
-
-            confirmReset.addEventListener("click", function () {
-                resetModal.style.display = "none"; 
-                confirmResetModal.style.display = "block"; 
-            });
-
-            cancelFinalReset.addEventListener("click", function () {
-                confirmResetModal.style.display = "none"; 
-            });
-
-            confirmFinalReset.addEventListener("click", function () {
-                
-                localStorage.setItem("transactions", JSON.stringify([]));
-                transactions = [];  
-                displayTransactions();
-                confirmResetModal.style.display = "none"; 
-            });
+        resetButton.addEventListener("click", function () {
+            resetModal.style.display = "block";
         });
 
+        cancelReset.addEventListener("click", function () {
+            resetModal.style.display = "none";
+        });
+
+        confirmReset.addEventListener("click", function () {
+            transactions = [];  
+            saveToLocalStorage();
+            displayTransactions();
+            resetModal.style.display = "none";
+        });
+        });
 
         function setupResetModal() {
             const elements = {
@@ -506,7 +498,7 @@
 
             function resetTransactions() {
                 localStorage.setItem("transactions", JSON.stringify([]));
-                displayTransactions();
+                location.reload();
             }
 
             elements.resetButton.addEventListener("click", () => toggleModal("resetModal", true));
@@ -519,7 +511,10 @@
             elements.confirmFinalReset.addEventListener("click", resetTransactions);
         }
 
+       
         document.addEventListener("DOMContentLoaded", setupResetModal);
+
     </script>
+    
 </body>
 </html>
