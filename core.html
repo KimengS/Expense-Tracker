@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-           background: linear-gradient(135deg, #000428, #004e92);
-           background-size: 300% 300%;
-           animation: glowingGradient 12s ease infinite;
-           color: rgb(0, 0, 0);
-           margin: 0;
-           padding: 0;
-            font-family: '', sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
+            background-size: 300% 300%;
+            animation: glowingGradient 12s ease infinite;
+            color: rgb(0, 0, 0);
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
         }
 
         @keyframes glowingGradient {
@@ -43,7 +47,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             transform: translateY(-2px);
         }
-
         .main {
             display: flex;
             flex-direction: row;
@@ -125,10 +128,10 @@
             flex-direction: column;
             gap: 16px;
             flex: 1;
-            background-color: #ffffff;
+            background: rgba(255, 255, 255, 0.689);
             border-radius: 8px;
             padding: 30px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 6px rgba(255, 253, 253, 0.637);
         }
         .form-balance input {
             width: 100%;
@@ -173,7 +176,7 @@
         .List-transaction {
             grid-column: span 1;
             background-color: rgba(255, 255, 255, 0.521);
-            color: rgb(252, 252, 252);
+            color: rgb(255, 255, 255);
             padding: 20px;
             border-radius: 10px;
             max-height: 500px;
@@ -275,6 +278,21 @@
            border-radius: 10px;
            padding: px;
         }
+        .info-input:focus {
+           border-color: blue; /* Change border color to blue */
+           box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); /* Add a glowing effect */
+           animation: border-pulse 1.5s infinite; /* Apply the border pulse animation */
+        }
+
+ 
+        @keyframes border-pulse {
+        0%, 100% {
+            border-color: rgb(5, 5, 93); /* Start and end with blue */
+        }
+        50% {
+            border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
+        }
+        }
 
         .amount-selection-row {
            display: flex;
@@ -284,6 +302,21 @@
 
         .amount-input {
            width: 0%;
+        }
+        .amount-input:focus {
+           border-color: #0000ff; /* Change border color to blue */
+           box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); /* Add a glowing effect */
+           animation: border-pulse 1.5s infinite; /* Apply the border pulse animation */
+        }
+
+ 
+        @keyframes border-pulse {
+        0%, 100% {
+            border-color: blue; /* Start and end with blue */
+        }
+        50% {
+            border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
+        }
         }
 
         .select-box {
@@ -295,37 +328,112 @@
            flex: 1;
            background-color: #010101;
            color: white;
+           outline: none; /* Remove default outline */
+           transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for border and shadow */
         }
 
+
+        .select-box:focus {
+           border-color: blue; /* Change border color to blue */
+           box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); /* Add a glowing effect */
+           animation: border-pulse 1.5s infinite; /* Apply the border pulse animation */
+        }
+
+ 
+        @keyframes border-pulse {
+        0%, 100% {
+            border-color: blue; /* Start and end with blue */
+        }
+        50% {
+            border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
+        }
+        }
+     
         .select-box option:first-child {
-           font-size: 10px;
+            font-size: 15px;
+        }
+        .date-input {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box; /* Prevents padding from affecting width */
         }
 
-        .date-input {
-           width: 100%;
-           font-family: Arial, sans-serif;
-           flex: 1;
+       .date-input:focus {
+            border-color: blue;
+            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+            outline: none; /* Optional: Removes the default focus outline */
+            animation: border-pulse 1.5s infinite;
+        }
+
+        @keyframes border-pulse {
+        0% {
+            border-color: blue;
+            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+        }
+        50% {
+            border-color: lightblue; /* Slightly lighter blue */
+            box-shadow: 0 0 12px rgba(0, 0, 255, 0.4); /* Bigger glow */
+        }
+        100% {
+            border-color: blue;
+            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+        }
         }
 
         .add {
            display: flex;
-           gap: 16px;
            margin-top: 20px;
            flex-wrap: wrap;
+           gap: 30px;
         }
 
-        .more {  
-           height: 100px;
-           justify-content: center;
-           align-items: center;
-           border-radius: 8px;
-           flex: 1;
-           background-color: #ad9fbe;
-           padding: 10px;
-           text-align: center;
-           box-sizing: border-box;
-           display: flex;
+        .more {
+            width: 60px; 
+            height: 60px;
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(15px); 
+            border: 0px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 15px;
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            padding: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); 
+            transition: transform 0.8s ease, box-shadow 0.3s ease;  
+            background: rgba(255, 255, 255, 0.1)
         }
+
+
+        .more:hover {
+            transform: translateY(-10px); /* Slight lift on hover */
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+
+        @keyframes rotateBorder {
+            0% {
+                transform: rotate(45deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .more span {
+            color: rgba(255, 255, 255, 0.9); /* Light text color */
+            font-size: 18px; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+        }
+        .more img {
+           width: 100%;  
+           height: 100%; 
+           object-fit: cover;  
+    }
 
         #resetButton {
            border: none;
@@ -381,13 +489,43 @@
            border: 0px solid transparent;
            animation: glowingBorder 5s infinite;
         }
-       
+        .negative-balance {
+            color: rgb(254, 3, 3); 
+            font-weight: bold;
+        }
+
+        .select-box {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .select-box.income {
+            color: green;
+        }
+
+        .select-box.expense {
+            color: red;
+        }
+
+        #chartContainer {
+            width: 800px;
+            height: 400px;
+            margin: 20px auto;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        #visualizeButton {
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="appbar">
         <h1>Expense Tracker</h1>
-        
     </div>
     <div class="main">
         <div class="left">
@@ -418,7 +556,7 @@
                     <input name="amount" type="number" required placeholder="Amount" class="info-input amount-input" />
                     <div class="transactiontype">
                         <select name="transactiontype" class="select-box" required>
-                            <option value="" disabled selected>Click Me</option>
+                            <option value="" disabled selected>Caterory</option>
                             <option value="Income" style="color: rgb(5, 150, 5);">Income </option>
                             <option value="Expense" style="color: red;">Expense</option>
                         </select>
@@ -433,14 +571,25 @@
             </form>
             <div class="add">
                 <div class="more">
-                    <a href="./description.html">Description</a>
+                    <a href="./visualize.html" target="_blank"><button id="visualizeButton">
+                        <img src="./visualize.png" alt="Visualize"  width="30" height="30">
+                    </button></a>
                 </div>
                 <div class="more">
-                    <button id="resetButton"​>Reset</button>
+                    <a href="./description.html">
+                        <img src="./demo.png" alt="Logo" width="30" height="30">
+                    </a>
+                </div>
+                <div class="more">
+                    <button id="resetButton">
+                        <img src="./reset.png" alt="Reset Logo" width="50" height="50">
+                    </button>
                 </div>
                 
                 <div class="more">
-                    <a href="./about_us.html">About Us</a>
+                    <a href="./about_us.html">
+                        <img src="./about-us.png" alt="Logo" width="30" height="30">
+                    </a>
                 </div>
             </div>
         </div>
@@ -456,7 +605,11 @@
         <button id="confirmFinalReset">Yes</button>
         <button id="cancelFinalReset">No</button>
     </div>
-
+    <div id="chartContainer" style="display: none;">  
+        <canvas id="balanceChart" width="400" height="300"></canvas>
+        <canvas id="incomeChart" width="400" height="300"></canvas>
+        <canvas id="expenseChart" width="400" height="300"></canvas>
+    </div>
     
     <script>
         const transactionContainer = document.getElementById("transactioncontainer");
@@ -494,7 +647,7 @@
 
         // Ensure transactions are displayed when page loads
         window.addEventListener("load", () => { 
-        displayTransactions();
+            displayTransactions();
         });
     
         function calculateBalance() {
@@ -505,11 +658,17 @@
                 .filter(tx => tx.type === "Expense")
                 .reduce((sum, tx) => sum + tx.amount, 0);
             const balance = income - expense;
-    
-            balanceDisplay.textContent = `$ ${balance}`;
+
+            if (balance < 0) {
+                balanceDisplay.innerHTML = `(<span class="negative-balance">$${Math.abs(balance)}</span>)`;
+            } else {
+                balanceDisplay.textContent = `$ ${balance}`;
+            }
+
             incomeDisplay.textContent = `$ ${income}`;
             expenseDisplay.textContent = `$ ${expense}`;
         }
+
     
         function displayTransactions() {
             transactionContainer.innerHTML = "";
@@ -570,25 +729,30 @@
         }
         
         document.addEventListener("DOMContentLoaded", function () {
-        const resetButton = document.getElementById("resetButton");
-        const resetModal = document.getElementById("resetModal");
-        const confirmReset = document.getElementById("confirmReset");
-        const cancelReset = document.getElementById("cancelReset");
+            const resetButton = document.getElementById("resetButton");
+            const resetModal = document.getElementById("resetModal");
+            const confirmReset = document.getElementById("confirmReset");
+            const cancelReset = document.getElementById("cancelReset");
 
-        resetButton.addEventListener("click", function () {
-            resetModal.style.display = "block";
-        });
+            if (resetButton && resetModal && confirmReset && cancelReset) {
+                resetButton.addEventListener("click", function () {
+                    resetModal.style.display = "block";
+                });
 
-        cancelReset.addEventListener("click", function () {
-            resetModal.style.display = "none";
-        });
+                cancelReset.addEventListener("click", function () {
+                    resetModal.style.display = "none";
+                });
 
-        confirmReset.addEventListener("click", function () {
-            transactions = [];  
-            saveToLocalStorage();
-            displayTransactions();
-            resetModal.style.display = "none";
-        });
+                confirmReset.addEventListener("click", function () {
+                    transactions = [];  
+                    saveToLocalStorage();
+                    displayTransactions();
+                    resetModal.style.display = "none";
+                });
+            } else {
+                console.log("One or more elements are missing.");
+            }
+        
         });
 
         function setupResetModal() {
@@ -624,7 +788,102 @@
        
         document.addEventListener("DOMContentLoaded", setupResetModal);
 
+        document.getElementById("visualizeButton").addEventListener("click", function() {
+            console.log(transactions); 
+            localStorage.setItem("transactions", JSON.stringify(transactions));
+            window.location.href = "visualize.html";
+        });
+
+        const chartScript = document.createElement('script');
+        chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+        document.head.appendChild(chartScript);
+
+       
+        chartScript.onload = () => {
+            generateLineGraph(); 
+        };
+
+        function generateLineGraph(expenses = transactions) {  
+            const ctxBalance = document.getElementById('balanceChart').getContext('2d');
+            const ctxIncome = document.getElementById('incomeChart').getContext('2d');
+            const ctxExpense = document.getElementById('expenseChart').getContext('2d');
+
+
+            const sortedTransactions = [...expenses].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const balanceData = [];
+            let currentBalance = 0;
+            const incomeData = [];
+            const expenseData = [];
+
+            sortedTransactions.forEach(transaction => {
+                if (transaction.type === 'Income') {
+                    currentBalance += transaction.amount;
+                    incomeData.push({ x: transaction.date, y: transaction.amount });
+                } else {
+                    currentBalance -= transaction.amount;
+                    expenseData.push({ x: transaction.date, y: transaction.amount }); // Positive for chart display
+                }
+                balanceData.push({ x: transaction.date, y: currentBalance });
+            });
+
+
+            function createChart(ctx, data, label, color, yLabel) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            borderColor: color,
+                            fill: false,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'day' // Adjust as needed (day, month, year)
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: yLabel
+                                },
+                                beginAtZero: label !== 'Balance' // Start at 0 for Income/Expense
+                            }
+                        }
+                    }
+                });
+            }
+
+            createChart(ctxBalance, balanceData, 'Balance', 'blue', 'Balance');
+            createChart(ctxIncome, incomeData, 'Income', 'green', 'Amount');
+            createChart(ctxExpense, expenseData, 'Expense', 'red', 'Amount');
+        }
+
+
+        const visualizeButton = document.getElementById('visualizeButton');
+        const chartContainer = document.getElementById('chartContainer');
+
+        visualizeButton.addEventListener('click', () => {
+            chartContainer.style.display = 'block'; // Show the chart container
+            generateLineGraph(); // Generate the graph
+        });
+
+
+        
     </script>
+
+    
     
 </body>
 </html>

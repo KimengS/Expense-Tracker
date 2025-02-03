@@ -3,37 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Expense Tracker</title>
     <style>
-        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #161616;
+            background: #0a0a0a;
             overflow: hidden;
         }
 
-        .welcome-message {
-            font-size: 30px;
-            color: #2004d6;
+        .container {
             text-align: center;
-            opacity: 0;
-            animation: fadeIn 2s ease-out forwards, moveUp 2s ease-out forwards;
+            position: relative;
+            z-index: 2;
         }
 
-        
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .welcome-message {
+            font-size: 40px;
+            font-weight: bold;
+            color: #fff;
+            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes moveUp {
-            0% { transform: translateY(50px); }
-            100% { transform: translateY(0); }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-top: 5px solid #0000ff;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        .progress-bar-container {
+            width: 80%;
+            background: #333;
+            border-radius: 10px;
+            margin: 25px auto;
+            height: 10px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: #0000ff;
+            transition: width 2s linear;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particles span {
+            position: absolute;
+            display: block;
+            width: 4px;
+            height: 4px;
+            background: #340894;
+            border-radius: 50%;
+            animation: particleMove 5s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes particleMove {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(100vw); }
         }
 
         @keyframes fadeOut {
@@ -43,20 +97,47 @@
     </style>
 </head>
 <body>
-    <div class="welcome-message">
-        Welcome to Expense Tracker
+    <div class="container">
+        <div class="welcome-message" id="welcomeMessage">Expense Tracker</div>
+        <div class="loader" id="loader"></div> <!-- Spinning loader -->
+        <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
     </div>
 
+    <div class="particles">
+        <script>
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('span');
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.querySelector('.particles').appendChild(particle);
+            }
+        </script>
+    </div>
     <script>
-        
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const progressBarContainer = document.getElementById('progressBarContainer');
+        const progressBar = document.getElementById('progressBar');
+        const loader = document.getElementById('loader');
+
+        setTimeout(() => {
+            welcomeMessage.innerHTML = "The best way to manage your money";
+            loader.style.display = "none"; // Hide the loader when the phrase changes
+            progressBarContainer.style.display = "block";
+            setTimeout(() => {
+                progressBar.style.width = "100%";
+            }, 100);
+        }, 2000);
+
         setTimeout(() => {
             document.querySelector('.welcome-message').style.animation = "fadeOut 1s forwards";
-            
-            
+            progressBarContainer.style.animation = "fadeOut 1s forwards";
             setTimeout(() => {
-                window.location.href = "core.html";
-            }, 1000); 
-        }, 4000); 
+                window.location.href = "core-blue.html";
+            }, 1000);
+        }, 4000);
     </script>
 </body>
 </html>

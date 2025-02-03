@@ -3,69 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker - Overview & Usage</title>
+    <title>Expense Tracker - Overview & Usage Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: #fff;
             margin: 0;
-            padding: 20px;
-            background-color: #020202;
+            padding: 0;
         }
+
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: rgb(166, 163, 163);
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(10, 25, 47, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #0000ff;
+        }
+
+        h1, h2, h3 {
+            color: #fff;
+        }
+
+        .nav-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0000ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #004e92;
+        }
+
+        #overview, #usage {
+            display: none; 
+        }
+
+        #overview.active, #usage.active {
+            display: block;
+        }
+
+        #overview .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        #overview .overview-grid div {
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
-        h1, h2 {
-            color: #333;
+
+        #overview .overview-grid div:hover {
+            border: 2px solid #0000ff;
+            box-shadow: 0 0 15px #0000ff;
         }
-        p {
-            line-height: 1.6;
+
+        /* Card grid layout */
+        #usage .card-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
         }
-        ul {
-            padding-left: 20px;
+
+        .card {
+            border: 3px solid transparent;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            border-color: #0000ff;
+            cursor: pointer;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            #overview .overview-grid {
+                grid-template-columns: 1fr; 
+            }
+
+            /* For Usage Section */
+            #usage .card-grid {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+
+            .nav-btn {
+                width: 100%; 
+                margin-top: 10px;
+            }
+
+            .card-grid .card {
+                padding: 15px; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-btn {
+                font-size: 14px; 
+            }
+            #usage .card-grid {
+                grid-template-columns: 1fr; 
+            }
+
+            .card-grid .card {
+                padding: 10px; /
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="./index.html">Back</a>
+        <a href="./core.html" style="color: white;">Back to Home page</a>
     </header>
     <div class="container">
         <h1>Expense Tracker - System Overview & Usage Guide</h1>
-        
-        <h2>System Overview</h2>
-        <p>The <strong>Expense Tracker</strong> is a web-based financial management tool designed to help users monitor and control their income and expenses effectively. It provides an intuitive user interface that enables users to track financial transactions, visualize their spending patterns, and maintain an organized record of their financial health.</p>
-        
-        <h3>Key Features:</h3>
-        <ul>
-            <li><strong>Real-time Balance Calculation:</strong> Automatically updates the total balance based on recorded transactions.</li>
-            <li><strong>Income & Expense Categorization:</strong> Allows users to classify transactions as income or expenses.</li>
-            <li><strong>Transaction History:</strong> Provides a chronological view of all recorded financial activities.</li>
-            <li><strong>Reset Functionality:</strong> Enables users to clear all transaction data with a confirmation mechanism to prevent accidental data loss.</li>
-            <li><strong>User-friendly Interface:</strong> Ensures accessibility across different devices and screen sizes.</li>
-        </ul>
-        
-        <h2>Usage Guide</h2>
-        <h3>1. Adding a Transaction:</h3>
-        <p>Enter the <strong>amount, description, date, and category</strong> (income/expense), then click the <strong>Submit</strong> button to save the transaction.</p>
-        
-        <h3>2. Viewing Financial Summary:</h3>
-        <p>The dashboard displays key financial metrics, including <strong>total balance, income, and expenses</strong> for easy monitoring.</p>
-        
-        <h3>3. Managing Transactions:</h3>
-        <p>Users can review and track their transactions in the provided transaction history section.</p>
-        
-        <h3>4. Resetting Data:</h3>
-        <p>Clicking the <strong>Reset</strong> button triggers a confirmation prompt to ensure intentional data deletion. Upon confirmation, all transaction data is cleared, and the system resets.</p>
-        
-        <h3>5. Navigation & Additional Features:</h3>
-        <p>The system includes buttons for <strong>Description, Reset, and About Us</strong> to provide easy navigation and further interaction options.</p>
-        
-        <p>This system is designed to provide users with an efficient, structured, and hassle-free financial tracking experience, ensuring better financial decision-making and planning.</p>
+        <button class="nav-btn" onclick="showPage('overview')">Overview</button>
+        <button class="nav-btn" onclick="showPage('usage')">Usage Guide</button>
+        <section id="overview" class="active">
+            <h2>System Overview</h2>
+            <div class="overview-grid">
+                <div>
+                    <p>The Expense Tracker is a web-based financial management tool designed to help users monitor and control their income and expenses effectively. It provides an intuitive user interface that enables users to track financial transactions, visualize their spending patterns, and maintain an organized record of their financial health.</p>
+                </div>
+                <div>
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><i class="fas fa-balance-scale"></i> Real-time Balance Calculation</li>
+                        <li><i class="fas fa-chart-line"></i> Income & Expense Categorization</li>
+                        <li><i class="fas fa-history"></i> Transaction History</li>
+                        <li><i class="fas fa-trash-alt"></i> Reset Functionality</li>
+                        <li><i class="fas fa-user-friends"></i> User-friendly Interface</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section id="usage">
+            <h2>Usage Guide</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>1. Adding a Transaction</h3>
+                    <p>Enter the amount, description, date, and category (income/expense), then click the <strong>Submit</strong> button to save the transaction.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Viewing Financial Summary</h3>
+                    <p>The dashboard displays key financial metrics, including <strong>total balance, income, and expenses</strong> for easy monitoring.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Managing Transactions</h3>
+                    <p>Users can review and track their transactions in the provided transaction history section.</p>
+                </div>
+                <div class="card">
+                    <h3>4. Resetting Data</h3>
+                    <p>Clicking the <strong>Reset</strong> button triggers a confirmation prompt to ensure intentional data deletion. Upon confirmation, all transaction data is cleared, and the system resets.</p>
+                </div>
+                <div class="card">
+                    <h3>5. Navigation & Additional Features</h3>
+                    <p>The system includes buttons for <strong>Description, Reset, and About Us</strong> to provide easy navigation and further interaction options.</p>
+                </div>
+            </div>
+        </section>
+
     </div>
+
+    <script>
+        function showPage(page) {
+            document.getElementById('overview').classList.remove('active');
+            document.getElementById('usage').classList.remove('active');
+            document.getElementById(page).classList.add('active');
+        }
+    </script>
 </body>
 </html>
