@@ -572,6 +572,52 @@
           font-size: 16px;
           cursor: pointer;
         }
+        #resetButton {
+           border: none;
+           color: rgb(5, 5, 5);
+           background-color: transparent;
+           text-decoration: underline;
+           text-decoration-color: red;
+           transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        #resetButton:hover {
+           color: red; 
+           text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); 
+       }
+
+        #resetModal,
+        #confirmResetModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-radius: 10px;
+            border: 2px solid transparent; /* Initial border for animation */
+            animation: borderAnimation 2s infinite; /* Border animation */
+        }
+
+        @keyframes borderAnimation {
+          0% {
+            border-color: rgba(255, 0, 0, 0.5);
+        }
+        50% {
+            border-color: rgba(255, 0, 0, 0.9);
+        }
+        100% {
+            border-color: rgba(255, 0, 0, 0.5);
+        }
+        }
+
+       #confirmResetModal {
+            border: 2px solid rgba(0, 128, 0, 0.5); 
+            animation: borderAnimation 2s infinite; 
+        }
         
     </style>
 </head>
