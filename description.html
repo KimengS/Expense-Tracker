@@ -141,12 +141,17 @@
                 padding: 10px; /
             }
         }
+        #back{
+            display: flex;
+            text-align: right;
+            justify-content: flex-end;
+            align-items: center;
+            
+        }
     </style>
 </head>
 <body>
-    <header>
-        <a href="./core.html" style="color: white;">Back to Home page</a>
-    </header>
+    
     <div class="container">
         <h1>Expense Tracker - System Overview & Usage Guide</h1>
         <button class="nav-btn" onclick="showPage('overview')">Overview</button>
@@ -194,9 +199,15 @@
                 </div>
             </div>
         </section>
+        <div id="back">
+            <a href="./core.html" style="color: white;" >
+                <img src="./previous.png" alt="back" width="30px" height="30px">
+                
+            </a>
+        </div>
 
     </div>
-
+    
     <script>
         function showPage(page) {
             document.getElementById('overview').classList.remove('active');

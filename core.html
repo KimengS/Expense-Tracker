@@ -94,11 +94,18 @@
             transform: translateY(-5px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
         }
-
-        #greeting {
-            margin-top: 0;
+        
+        #welcome {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: flex-start; /* Align items to the left (or center, or flex-end) */
         }
-
+        #greeting {
+            margin-right: 5px; 
+        }
+        #quote {
+            margin-top: -25px; 
+        }
         .balance {
             display: flex;
             gap: 16px;
@@ -328,8 +335,8 @@
            flex: 1;
            background-color: #010101;
            color: white;
-           outline: none; /* Remove default outline */
-           transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for border and shadow */
+           outline: none; 
+           transition: border-color 0.3s ease, box-shadow 0.3s ease;  
         }
 
 
@@ -529,20 +536,22 @@
     </div>
     <div class="main">
         <div class="left">
-            <h1 id="greeting">Good Night</h1>
-            <p>Being conscious of your costs is critical. Managing it well will help you achieve your dream.</p>
+            <div id="welcome">
+                <h1 id="greeting">Good Night</h1>
+                <p id="quote">Being conscious of your flow of your money is critical. Managing it well will help you achieve your dream.</p>
+            </div>
             <div class="balance">
                 <div class="card-balance">
                     <h5>Balance</h5>
-                    <h3 id="balance">$ 0</h3>
+                    <h3 id="balance">$ 0.00</h3>
                 </div>
                 <div class="card-balance">
                     <h5>Income</h5>
-                    <h3 id="income">$ 0</h3>
+                    <h3 id="income">$ 0.00</h3>
                 </div>
                 <div class="card-balance">
                     <h5>Expense</h5>
-                    <h3 id="expense">$ 0</h3>
+                    <h3 id="expense">$ 0.00</h3>
                 </div>
             </div>
             <div>   
@@ -560,6 +569,7 @@
                             <option value="Income" style="color: rgb(5, 150, 5);">Income </option>
                             <option value="Expense" style="color: red;">Expense</option>
                         </select>
+                        
                     </div>
                 </div>
                 <div class="form-row">
@@ -571,9 +581,9 @@
             </form>
             <div class="add">
                 <div class="more">
-                    <a href="./visualize.html" target="_blank"><button id="visualizeButton">
-                        <img src="./visualize.png" alt="Visualize"  width="30" height="30">
-                    </button></a>
+                    <a href="./visualize.html" target="_blank">
+                        <img src="./visualize.png" alt="Logo" width="30" height="30">
+                    </a>
                 </div>
                 <div class="more">
                     <a href="./description.html">
@@ -825,65 +835,7 @@
                     expenseData.push({ x: transaction.date, y: transaction.amount }); // Positive for chart display
                 }
                 balanceData.push({ x: transaction.date, y: currentBalance });
-            });
-
-
-            function createChart(ctx, data, label, color, yLabel) {
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        datasets: [{
-                            label: label,
-                            data: data,
-                            borderColor: color,
-                            fill: false,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            x: {
-                                type: 'time',
-                                time: {
-                                    unit: 'day' // Adjust as needed (day, month, year)
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Date'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: yLabel
-                                },
-                                beginAtZero: label !== 'Balance' // Start at 0 for Income/Expense
-                            }
-                        }
-                    }
-                });
-            }
-
-            createChart(ctxBalance, balanceData, 'Balance', 'blue', 'Balance');
-            createChart(ctxIncome, incomeData, 'Income', 'green', 'Amount');
-            createChart(ctxExpense, expenseData, 'Expense', 'red', 'Amount');
-        }
-
-
-        const visualizeButton = document.getElementById('visualizeButton');
-        const chartContainer = document.getElementById('chartContainer');
-
-        visualizeButton.addEventListener('click', () => {
-            chartContainer.style.display = 'block'; // Show the chart container
-            generateLineGraph(); // Generate the graph
-        });
-
-
-        
-    </script>
-
-    
-    
+            });}
+    </script>  
 </body>
 </html>

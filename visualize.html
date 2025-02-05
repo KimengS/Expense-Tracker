@@ -2,21 +2,65 @@
 <html>
 <head>
     <title>Expense Chart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body{
-            background-color: rgb(210, 210, 231);
-        }
-        #chartContainer {
+        body {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 50%;
-            height: 50%;
-            align-items: center;
+            flex-direction: column; 
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #000428, #004e92);
+            background-size: 300% 300%;
+            animation: glowingGradient 12s ease infinite;
+            color: white; 
+            font-family: 'Poppins', sans-serif;
+            
         }
+
+        header {
+            
+            padding: 10px;
+            text-align: left;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #chartContainer {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 300px;
+            height: 300px; 
+            margin: 0 auto; 
+        }
+
         canvas {
-            margin: 10px;
+            width: 100%;
+            height: 100%; 
+        }
+
+        @keyframes glowingGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
     </style>
 </head>
@@ -26,91 +70,63 @@
     </header>
     <h1>Expense Visualization</h1>
     <div id="chartContainer">
-        <canvas id="expenseChart" width="800" height="400"></canvas>
-    </div>
+        <canvas id="expenseChart" width="100px" height="100px"></canvas> </div>
 
     <script>
         const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
-        // Prepare data for the chart (Income, Expense, Balance)
-        const dates = [...new Set(transactions.map(tx => tx.date))].sort(); // Unique, sorted dates
+        let totalIncome = 0;
+        let totalExpense = 0;
 
-        const incomeData = dates.map(date => {
-            let sum = 0;
-            transactions.forEach(tx => {
-                if (tx.type === "Income" && tx.date === date) {
-                    sum += tx.amount;
-                }
-            });
-            return sum;
+        transactions.forEach(tx => {
+            if (tx.type === "Income") {
+                totalIncome += tx.amount;
+            } else if (tx.type === "Expense") {
+                totalExpense += tx.amount;
+            }
         });
 
-        const expenseData = dates.map(date => {
-            let sum = 0;
-            transactions.forEach(tx => {
-                if (tx.type === "Expense" && tx.date === date) {
-                    sum += tx.amount;
-                }
-            });
-            return sum;
-        });
-
-        const balanceData = [];
-        let currentBalance = 0;
-        dates.forEach(date => {
-            let incomeForDate = 0;
-            let expenseForDate = 0;
-            transactions.forEach(tx => {
-                if (tx.type === 'Income' && tx.date === date) {
-                    incomeForDate += tx.amount;
-                } else if (tx.type === 'Expense' && tx.date === date) {
-                    expenseForDate += tx.amount;
-                }
-            });
-            currentBalance += incomeForDate - expenseForDate;
-            balanceData.push(currentBalance);
-        });
+        const totalBalance = totalIncome - totalExpense;
 
         const ctx = document.getElementById('expenseChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line',
+            type: 'doughnut',
             data: {
-                labels: dates,
-                datasets: [
-                    {
-                        label: 'Income',
-                        data: incomeData,
-                        borderColor: 'green',
-                        fill: false,
-                    },
-                    {
-                        label: 'Expense',
-                        data: expenseData,
-                        borderColor: 'red',
-                        fill: false,
-                    },
-                    {
-                        label: 'Balance',
-                        data: balanceData,
-                        borderColor: 'blue',
-                        fill: false,
-                    }
-                ]
+                labels: ['Income', 'Expense', 'Balance'],
+                datasets: [{
+                    data: [totalIncome, totalExpense, totalBalance],
+                    backgroundColor: ['#A75BDB', '#F2C94C', '#5B72E8'], 
+                    borderWidth: 1, 
+                    borderColor: '#fff', 
+                    hoverOffset: 4, 
+                  
+                }]
             },
             options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
+                cutout: '60%', 
+                rotation: -90, 
+                circumference: 360, 
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Amount'
-                        }
+                    title: {
+                        display: true,
+                        text: 'Total Income, Expense, and Balance'
+                    }
+                },
+                elements: {
+                    arc: {
+                        borderWidth: 0 
+                    }
+                },
+                layout: {
+                    padding: { // Add padding to prevent labels from being cut off
+                        top: 10,
+                        bottom: 10,
+                        left: 10,
+                        right: 10
                     }
                 }
             }
