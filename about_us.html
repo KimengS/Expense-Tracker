@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMeov5u3SN9PtB1IjX4T1vR5V5c0M7pV8q1D3h" crossorigin="anonymous"> <!-- Font Awesome -->
     <title>About Us</title>
     <style>
         * {
@@ -15,57 +16,142 @@
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #02153E;
+            background: linear-gradient(90deg, #000428, #313192);
+            background-size: 200% 200%;
+            animation: glowingGradient 5s ease infinite; 
             font-family: 'Poppins', sans-serif;
             color: #FFFFFF;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0; 
+        }
+
+       @keyframes glowingGradient {
+          0% {
+            background-position: 0% 50%;
+        }
+          50% {
+            background-position: 100% 50%; 
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+        }
+
+        .header {
+            width: 100%;
+            background-color: #0c0d46;
+            padding: 10px 20px; 
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            position: fixed;
+            z-index: 1;
+            
+        }
+        .back-home {
+            background-color: transparent; 
+            color: #FFFFFF; 
+            border: none; 
+            cursor: pointer;
+            margin-right: 5px; 
+            display: flex;
+            align-items: left;
+        }
+
+        .back-home i {
+            margin-left: 5px; 
         }
 
         h1 {
-            font-size: 2rem;
-            margin-top: 20px;
-            text-align: center;
+            font-size: 1.5rem;
+            margin: 0;
+            text-align: center; 
         }
 
         p.subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #A8B6C7;
-            margin-bottom: 20px;
-            text-align: center;
+            text-align: center; 
         }
 
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1000px;
             padding: 20px;
-            box-sizing: border-box;
+            margin: 80px;
+            overflow-y: auto;
+            flex-grow: 1;
         }
 
         .item {
-            background-color: #142850;
+            position: relative;
+            margin-top: 60px;
+            padding: 10px;
+            background-color: #22448a81;
             border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+            overflow: hidden; 
+            text-align: center; 
+            max-height: 220px;
         }
 
-        .item:hover {
-            transform: translateY(-10px);
+        .item::before,
+        .item::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            box-shadow: 0 0 0 #4466af; 
         }
 
+        .item::before {
+            top: 0;
+            left: 0;
+            animation: drawBorder 1.5s linear infinite; 
+        }
+
+        .item::after {
+            bottom: 0;
+            right: 0;
+            animation: drawBorder 1.5s linear infinite; 
+            animation-delay: 0.75s; 
+        }
+
+        @keyframes drawBorder {
+        0% {
+            border-color: transparent;
+        }
+        25% {
+            border-color: #0050fd; 
+            box-shadow: 0 0 20px #4466af; 
+        }
+        50% {
+            border-color: #8c00ff; 
+            box-shadow: 0 0 20px #00ff73; 
+        }
+        100% {
+           border-color: transparent; 
+           box-shadow: 0 0 0 #00ff66; 
+         }
+        }
+
+        .name {
+            position: relative; 
+            font-size: 1rem; 
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
         .frame {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 15px auto;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px auto;
             border-radius: 50%;
             overflow: hidden;
             background-color: #FFFFFF;
@@ -78,41 +164,42 @@
         }
 
         .name {
-            font-size: 1.1rem;
+            font-size: 1rem; 
             font-weight: bold;
             margin-bottom: 5px;
         }
 
         .role {
-            font-size: 0.85rem;
+            font-size: 0.75rem; 
             color: #A8B6C7;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         footer {
-            background-color: #0A1A40;
+            background-color: #0c0d46;
             width: 100%;
-            padding: 40px 20px;
+            padding: 10px 20px;
             color: #FFFFFF;
+            text-align: center;
         }
 
         .footer-container {
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
-            max-width: 1200px;
-            width: 100%;
+            justify-content: space-between;
+            max-width: 900px; 
+            margin: 0 auto; 
         }
 
         .footer-section {
             flex: 1;
-            min-width: 200px;
-            margin: 10px;
+            min-width: 150px; 
+            margin: 5px; 
         }
 
         .footer-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 1rem; 
+            margin-bottom: 10px;
             color: #A8B6C7;
         }
 
@@ -123,7 +210,7 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 5px; 
         }
 
         .footer-section ul li a {
@@ -139,20 +226,20 @@
         .social-icons-footer {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px; 
+            margin-top: 10px; 
         }
 
         .social-icons-footer a {
-            width: 40px;
-            height: 40px;
+            width: 30px; 
+            height: 30px; 
             background-color: #FFFFFF;
             color: #0A1A40;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1rem; 
             text-decoration: none;
         }
 
@@ -162,17 +249,83 @@
         }
 
         .footer-bottom {
-            margin-top: 20px;
-            font-size: 0.85rem;
+            margin-top: 10px; 
+            font-size: 0.75rem; 
             color: #A8B6C7;
             text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem; 
+            }
+
+            p.subtitle {
+                font-size: 0.9rem; 
+            }
+
+            .container {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+                padding: 10px;
+            }
+
+            .item {
+                padding: 8px; 
+            }
+
+            .frame {
+                width: 60px; 
+                height: 60px; 
+            }
+
+            .name {
+                font-size: 0.9rem; 
+            }
+
+            .role {
+                font-size: 0.65rem; 
+            }
+
+            .footer-section h3 {
+                font-size: 0.9rem; 
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.2rem; 
+            }
+
+            p.subtitle {
+                font-size: 0.8rem; 
+            }
+
+            .container {
+                grid-template-columns: 1fr; 
+            }
+
+            .footer-section {
+                flex: 1 1 100%; 
+                margin: 10px 0; 
+            }
+        }
+        .back-home{
+            display: flex;
+            text-align: left;
+            left: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Meet Our Team</h1>
-    <p class="subtitle">These people work on making our product the best.</p>
-
+    <div class="header">
+        <button class="back-home" onclick="window.location.href='./core.html';">
+            <i class="fas fa-home"></i> Back Home 
+        </button>
+        <div class="header-title"> 
+            <h1>Meet Our Team</h1>
+            <p class="subtitle">These people work on making this web application user-friendly.</p>
+        </div>
+    </div>
     <div class="container">
         <div class="item">
             <div class="frame"><img src="./KimEng.PNG" alt="Seang KimEng"></div>
@@ -208,22 +361,29 @@
                 <ul>
                     <li><a href="mailto:team@company.com">Email: team@company.com</a></li>
                     <li><a href="tel:+1234567890">Phone: +1234567890</a></li>
-                    <li><a href="./contact.html">Contact Form</a></li>
+                    <li><p>Contact Form</p>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./core.html">Home</a></li>
                     <li><a href="./description.html">Demo</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Follow Us</h3>
                 <div class="social-icons-footer">
-                    <a href="#" aria-label="Facebook">F</a>
-                    <a href="#" aria-label="Twitter">T</a>
-                    <a href="#" aria-label="LinkedIn">L</a>
+                    <a href="#" aria-label="Facebook">
+                        <img src="./facebook.png" width="40px">
+                    </a>
+                    
+                    <a href="#" aria-label="Instagra,">
+                        <img src="./instagram.png" width="40px">
+                    </a>
+                    <a href="#" aria-label="Telegram">
+                        <img src="./telegram.png" width="40px" height="40px">
+                    </a>
                 </div>
             </div>
         </div>

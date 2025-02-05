@@ -20,18 +20,16 @@
         }
 
         @keyframes glowingGradient {
-        0% {
-           background-position: 0% 50%;
+            0% {
+            background-position: 0% 50%;
+            }
+            50% {
+            background-position: 100% 50%;
+            }
+            100% {
+            background-position: 0% 50%;
+            }
         }
-        50% {
-           background-position: 100% 50%;
-        }
-        100% {
-        background-position: 0% 50%;
-        }
-        }
-
-
         .appbar {
             color: white;
             height: 70px;
@@ -49,7 +47,7 @@
         }
         .main {
             display: flex;
-            flex-direction: row; /* Keep the row direction */
+            flex-direction: row; 
             margin-top: 20px;
             margin-bottom: 10px;
             margin-right: 50px;
@@ -87,7 +85,6 @@
             -webkit-backdrop-filter: blur(12px); 
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-
         .right:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
@@ -123,7 +120,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             color: #000000;
         }
-
         .card-balance:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -210,6 +206,7 @@
             border-radius: 5px; 
             align-items: center;
             width: 90%;
+            height: 20px;
             
         }
 
@@ -222,7 +219,6 @@
         .icon-label {
             cursor: pointer;
             display: flex;
-            
             align-items: center;
             white-space: nowrap; 
         }
@@ -256,71 +252,61 @@
             width: auto;
             max-height: 40px;
             transition: transform 0.2s ease, background-color 0.2s ease;
-            justify-content: space-between;  /* Distribute content */
+            justify-content: space-between;  
         }
-
         .transaction:hover {
             transform: translateY(-2px);
             background-color: rgb(59, 72, 68);
         }
-
         .transaction .front {
            display: flex;
            gap: 8px;
            align-items: center;
            font-size: 12px;
         }
-
         .transaction .middle {
            flex: 1;
            display: flex;
-           justify-content: center;  /* Center content inside .middle */
+           justify-content: center;  
            gap: 8px;
            align-items: center;
            font-size: 12px;
         }
-
         .transaction .end {
            font-size: 10px;
            color: gray;
         }
-
         #tag {
            background-color: greenyellow;
            padding: 4px 15px;
            border-radius: 8px;
            font-size: 10px;
         }
-
         .font {
            display: flex;
            gap: 20px;
         }
-
         .delete-icon {
            cursor: pointer;
            display: none;
         }
-
         .transaction:hover .delete-icon {
            display: block;
         }
-
         @media (max-width: 768px) {
-    .main {
-           flex-direction: column;
-        }
+            .main {
+            flex-direction: column;
+            }
 
-        .card-balance .more {
-           min-width: auto;
-           width: 100%;
-        }
+            .card-balance .more {
+            min-width: auto;
+            width: 100%;
+            }
 
-        .form-balance input, .form-balance button {
-           width: 100%;
+            .form-balance input, .form-balance button {
+            width: 100%;
+            }
         }
-        }
-
         .form-row {
            display: flex;
            gap: 16px;
@@ -341,85 +327,54 @@
            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); 
            animation: border-pulse 1.5s infinite; 
         }
-
- 
         @keyframes border-pulse {
-        0%, 100% {
-            border-color: rgb(5, 5, 93); /* Start and end with blue */
-        }
-        50% {
-            border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
-        }
-        }
-
-        .amount-selection-row {
-           display: flex;
-           gap: 20px;
-           margin-top: 10px;
-        }
-
-        .amount-input {
-           width: 90%;
+            0%, 100% {
+                border-color: rgb(5, 5, 93); /* Start and end with blue */
+            }
+            50% {
+                border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
+            }
         }
         .amount-input:focus {
            border-color: #0000ff; 
            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); 
            animation: border-pulse 1.5s infinite;
         }
-        .amount-selection-row {
-            display: flex;
-            gap: 10px; 
-            width: 100%; 
-        }
-
-        .amount-selection-row > * { 
-            flex: 1; 
-            display: flex;
-            align-items: center; 
-        }
-
-        .amount-input {
-            width: auto; 
-        }
-
+        
         .transaction-type {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 50px;
             width: auto;
         }
 
         .radio-group {
             display: flex;
-            gap: 20px;
+            width: 100%;
+            gap: 100px;
             border: 1px solid #ccc;
             padding: 10px;
             border-radius: 5px;
             align-items: center;
             flex: 1; 
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
         }
 
         .radio-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 15px;
         }
 
-        .icon-label {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-
- 
+        
         @keyframes border-pulse {
-        0%, 100% {
-            border-color: blue; 
-        }
-        50% {
-            border-color: rgba(0, 0, 255, 0.3); 
-        }
+            0%, 100% {
+                border-color: blue; 
+            }
+            50% {
+                border-color: rgba(0, 0, 255, 0.3); 
+            }
         }
 
         .select-box {
@@ -435,7 +390,6 @@
            transition: border-color 0.3s ease, box-shadow 0.3s ease;  
         }
 
-
         .select-box:focus {
            border-color: blue; 
            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); 
@@ -444,21 +398,19 @@
 
  
         @keyframes border-pulse {
-        0%, 100% {
-            border-color: blue; 
+            0%, 100% {
+                border-color: blue; 
+            }
+            50% {
+                border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
+            }
         }
-        50% {
-            border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
-        }
-        }
-     
         .select-box option:first-child {
             font-size: 15px;
         }
         .date-input {
             width: 100%;
-            font-family: Arial, sans-serif;
-            box-sizing: border-box; /* Prevents padding from affecting width */
+            box-sizing: border-box; 
         }
 
        .date-input:focus {
@@ -469,20 +421,19 @@
         }
 
         @keyframes border-pulse {
-        0% {
-            border-color: blue;
-            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+            0% {
+                border-color: blue;
+                box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+            }
+            50% {
+                border-color: lightblue; 
+                box-shadow: 0 0 12px rgba(0, 0, 255, 0.4); 
+            }
+            100% {
+                border-color: blue;
+                box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+            }
         }
-        50% {
-            border-color: lightblue; 
-            box-shadow: 0 0 12px rgba(0, 0, 255, 0.4); 
-        }
-        100% {
-            border-color: blue;
-            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
-        }
-        }
-
         .add {
            display: flex;
            margin-top: 20px;
@@ -492,8 +443,7 @@
 
         .more {
             width: 60px; 
-            height: 60px;
-            background: rgba(255, 255, 255, 0.15); 
+            height: 60px; 
             backdrop-filter: blur(15px); 
             border: 0px solid rgba(255, 255, 255, 0.1); 
             border-radius: 15px;
@@ -510,8 +460,6 @@
             transition: transform 0.8s ease, box-shadow 0.3s ease;  
             background: rgba(255, 255, 255, 0.1)
         }
-
-
         .more:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); 
@@ -536,7 +484,7 @@
            width: 100%;  
            height: 100%; 
            object-fit: cover;  
-    }
+        }
 
         #resetButton {
            border: none;
@@ -572,19 +520,19 @@
            border-radius: 10px;
         }
 
-    @keyframes glowingBorder {
-        0% {
-           border-color: #000000;
-           box-shadow: 0 0 5px #240790;
-        }
-        50% {
-           border-color: #000000;
-           box-shadow: 0 0 20px #240790;
-        }
-        100% {
-           border-color: #000000;
-           box-shadow: 0 0 5px #240790;
-        }
+        @keyframes glowingBorder {
+            0% {
+            border-color: #000000;
+            box-shadow: 0 0 5px #240790;
+            }
+            50% {
+            border-color: #000000;
+            box-shadow: 0 0 20px #240790;
+            }
+            100% {
+            border-color: #000000;
+            box-shadow: 0 0 5px #240790;
+            }
         }
 
         .card-balance,
@@ -624,6 +572,7 @@
           font-size: 16px;
           cursor: pointer;
         }
+        
     </style>
 </head>
 <body>
@@ -658,7 +607,7 @@
         <div class="right">
             <form onsubmit="submitForm(event)" class="form-balance">
                 <div class="amount-selection-row">
-                    <input name="amount" type="number" required placeholder="Amount" class="info-input amount-input" />
+                    <input name="amount" type="number" id="amount" required placeholder="Amount" class="info-input amount-input" />
                     <div class="transaction-type">  
                         <div class="radio-group">
                             <div class="radio-item">
@@ -666,7 +615,7 @@
                                 <label for="income" class="icon-label" style="color: green">Income</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="expense" name="transaction-type" value="Expense" >
+                                <input type="radio" id="expense" name="transaction-type" value="Expense" required>
                                 <label for="expense" class="icon-label" style="color: red">Expense</label>                               
                             </div>
                         </div>

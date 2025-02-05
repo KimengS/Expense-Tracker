@@ -124,12 +124,12 @@
 
         setTimeout(() => {
             welcomeMessage.innerHTML = "The best way to manage your money";
-            loader.style.display = "none"; // Hide the loader when the phrase changes
+            loader.style.display = "none"; 
             progressBarContainer.style.display = "block";
             setTimeout(() => {
                 progressBar.style.width = "100%";
             }, 100);
-        }, 2000);
+        }, 1000);
 
         setTimeout(() => {
             document.querySelector('.welcome-message').style.animation = "fadeOut 1s forwards";
@@ -137,7 +137,7 @@
             setTimeout(() => {
                 window.location.href = "core.html";
             }, 1000);
-        }, 4000);
+        }, 3000);
     </script>
 </body>
 </html>
