@@ -200,7 +200,7 @@
 
         .radio-group {
             display: flex; 
-            gap: 20px;
+            justify-content: space-between;
             border: 1px solid #ccc;
             padding: 10px; 
             border-radius: 5px; 
@@ -213,7 +213,7 @@
         .radio-item {
             display: flex;
             align-items: center; 
-            gap: 5px; 
+            
         }
 
         .icon-label {
@@ -251,7 +251,8 @@
             flex-wrap: nowrap;
             width: auto;
             max-height: 40px;
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            transition: transform 0.2s ease, 
+            background-color 0.2s ease;
             justify-content: space-between;  
         }
         .transaction:hover {
@@ -329,10 +330,10 @@
         }
         @keyframes border-pulse {
             0%, 100% {
-                border-color: rgb(5, 5, 93); /* Start and end with blue */
+                border-color: rgb(5, 5, 93); 
             }
             50% {
-                border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
+                border-color: rgba(0, 0, 255, 0.3); 
             }
         }
         .amount-input:focus {
