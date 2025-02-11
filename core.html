@@ -8,618 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #000428, #004e92);
-            background-size: 300% 300%;
-            animation: glowingGradient 12s ease infinite;
-            color: rgb(0, 0, 0);
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        @keyframes glowingGradient {
-            0% {
-            background-position: 0% 50%;
-            }
-            50% {
-            background-position: 100% 50%;
-            }
-            100% {
-            background-position: 0% 50%;
-            }
-        }
-        .appbar {
-            color: white;
-            height: 70px;
-            background: linear-gradient(45deg, #000000, #2575fc);
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-        .appbar:hover {
-            background: linear-gradient(45deg, #2575fc, #000000);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            transform: translateY(-2px);
-        }
-        .main {
-            display: flex;
-            flex-direction: row; 
-            margin-top: 20px;
-            margin-bottom: 10px;
-            margin-right: 50px;
-            gap: 30px;
-            padding: 20px;
-            justify-content: space-between;
-            width: 90%;
-        }
-        .left {
-            background: rgba(255, 255, 255, 0.059);
-            padding: 20px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-            color: #ffffff;
-        }
-
-        .left:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-        }
-        .right {
-            background: rgba(255, 255, 255, 0.365); 
-            max-height: fit-content;
-            padding: 10px;
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .right:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-        }
-        
-        #welcome {
-            display: flex;
-            flex-direction: column; 
-            align-items: flex-start; 
-        }
-        #greeting {
-            margin-right: 5px; 
-        }
-        #quote {
-            margin-top: -25px; 
-        }
-        .balance {
-            display: flex;
-            gap: 16px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .card-balance {
-            border-radius: 8px;
-            flex: 1;
-            background-color: rgba(255, 255, 255, 0.521);
-            padding: 10px;
-            text-align: center;
-            box-sizing: border-box;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            color: #000000;
-        }
-        .card-balance:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .form-balance {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            flex: 1;
-            background: rgba(255, 255, 255, 0.689);
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0px 4px 6px rgba(255, 253, 253, 0.637);
-        }
-        form-balance input,
-        .form-balance select { 
-            width: 100%;
-            height: 30px;
-            background-color: transparent;
-            outline: none;
-            border: 1px solid gray;
-            border-radius: 4px;
-            padding: 5px;
-            transition: border-color 0.3s ease;
-            box-sizing: border-box; 
-        }
-
-        .form-balance input:focus,
-        .form-balance select:focus { 
-            border-color: #2575fc;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-        }
-        .form-balance input {
-            width: 100%;
-            height: 30px;
-            background-color: transparent;
-            outline: none;
-            border: 1px solid gray;
-            border-radius: 4px;
-            padding: 5px;
-            transition: border-color 0.3s ease;
-        }
-        .font input:focus {
-            border-color: #2575fc;
-        }
-
-        .form-balance button {
-            height: 45px;
-            width: 150px;
-            background: linear-gradient(45deg, #000000, #2575fc);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            align-self: center;
-        }
-
-        .form-balance button:hover {
-            background: linear-gradient(45deg, #150d8e, #000000);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            transform: translateY(-2px);
-        }
-       
-        .amount-selection-row {
-            display: flex;
-            flex-direction: column; 
-            gap: 10px; 
-            width: 90%; 
-        }
-
-        .transaction-type {
-            display: flex;
-            align-items: center;  
-            gap: 15px; 
-        }
-
-        .radio-group {
-            display: flex; 
-            justify-content: space-between;
-            border: 1px solid #ccc;
-            padding: 10px; 
-            border-radius: 5px; 
-            align-items: center;
-            width: 90%;
-            height: 20px;
-            
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center; 
-            
-        }
-
-        .icon-label {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            white-space: nowrap; 
-        }
-        .transactiontype {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .List-transaction {
-            grid-column: span 1;
-            background-color: rgba(255, 255, 255, 0.521);
-            color: rgb(255, 255, 255);
-            padding: 20px;
-            border-radius: 10px;
-            max-height: 250px;
-            overflow-y: auto;
-            margin-top: 10px;
-            padding: 20px;
-        }
-        .transaction {
-            display: flex;
-            background-color: rgb(46, 57, 53);
-            border-radius: 16px;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 3px;
-            padding: 8px;
-            flex-wrap: nowrap;
-            width: auto;
-            max-height: 70px;
-            transition: transform 0.2s ease, 
-            background-color 0.2s ease;
-            justify-content: space-between;  
-        }
-        .transaction:hover {
-            transform: translateY(-2px);
-            background-color: rgb(59, 72, 68);
-        }
-        .transaction .front {
-           display: flex;
-           gap: 8px;
-           align-items: center;
-           font-size: 12px;
-        }
-        .transaction .middle {
-           flex: 1;
-           display: flex;
-           justify-content: center;  
-           gap: 8px;
-           align-items: center;
-           font-size: 12px;
-        }
-        .transaction .end {
-           font-size: 10px;
-           color: gray;
-        }
-        #tag {
-           background-color: greenyellow;
-           padding: 4px 15px;
-           border-radius: 8px;
-           font-size: 10px;
-        }
-        .font {
-           display: flex;
-           gap: 20px;
-        }
-        .delete-icon {
-           cursor: pointer;
-           display: none;
-        }
-        .transaction:hover .delete-icon {
-           display: block;
-        }
-        @media (max-width: 768px) {
-            .main {
-            flex-direction: column;
-            }
-
-            .card-balance .more {
-            min-width: auto;
-            width: 100%;
-            }
-
-            .form-balance input, .form-balance button {
-            width: 100%;
-            }
-        }
-        .form-row {
-           display: flex;
-           gap: 16px;
-           margin-top: 10px;
-        }
-
-        .info-input {
-           width: 48%;
-           height: 20px;
-           background-color: transparent;
-           outline: none;
-           border: 1px solid gray;
-           border-radius: 10px;
-           padding: px;
-        }
-        .info-input:focus {
-           border-color: blue; 
-           box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); 
-           animation: border-pulse 1.5s infinite; 
-        }
-        @keyframes border-pulse {
-            0%, 100% {
-                border-color: rgb(5, 5, 93); 
-            }
-            50% {
-                border-color: rgba(0, 0, 255, 0.3);
-            }
-        }
-        .amount-input:focus {
-           border-color: #0000ff; 
-           box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); 
-           animation: border-pulse 1.5s infinite;
-        }
-        
-        .transaction-type {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            width: auto;
-        }
-
-        .radio-group {
-            display: flex;
-            width: 90%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            align-items: center;
-            flex: 1; 
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 5px;
-        }
-
-        
-        @keyframes border-pulse {
-            0%, 100% {
-                border-color: blue; 
-            }
-            50% {
-                border-color: rgba(0, 0, 255, 0.3); 
-            }
-        }
-
-        .select-box {
-           width: 50%;
-           padding: 10px;
-           font-size: 16px;
-           border-radius: 40px;
-           border: 1px solid rgb(53, 31, 31);
-           flex: 1;
-           background-color: #010101;
-           color: white;
-           outline: none; 
-           transition: border-color 0.3s ease, box-shadow 0.3s ease;  
-        }
-
-        .select-box:focus {
-           border-color: blue; 
-           box-shadow: 0 0 8px rgba(0, 0, 255, 0.6); 
-           animation: border-pulse 1.5s infinite; 
-        }
-
- 
-        @keyframes border-pulse {
-            0%, 100% {
-                border-color: blue; 
-            }
-            50% {
-                border-color: rgba(0, 0, 255, 0.3); /* Fade to a lighter blue */
-            }
-        }
-        .select-box option:first-child {
-            font-size: 15px;
-        }
-        .date-input {
-            width: 100%;
-            box-sizing: border-box; 
-        }
-
-       .date-input:focus {
-            border-color: blue;
-            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
-            outline: none; 
-            animation: border-pulse 1.5s infinite;
-        }
-
-        @keyframes border-pulse {
-            0% {
-                border-color: blue;
-                box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
-            }
-            50% {
-                border-color: lightblue; 
-                box-shadow: 0 0 12px rgba(0, 0, 255, 0.4); 
-            }
-            100% {
-                border-color: blue;
-                box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
-            }
-        }
-        .add {
-           display: flex;
-           margin-top: 20px;
-           flex-wrap: wrap;
-           gap: 30px;
-        }
-
-        .more {
-            width: 60px; 
-            height: 60px; 
-            backdrop-filter: blur(15px); 
-            border: 0px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 15px;
-            display: flex;
-            flex: 1;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-sizing: border-box;
-            padding: 10px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); 
-            transition: transform 0.8s ease, box-shadow 0.3s ease;  
-            background: rgba(255, 255, 255, 0.1)
-        }
-        .more:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); 
-        }
-
-        @keyframes rotateBorder {
-            0% {
-                transform: rotate(45deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .more span {
-            color: rgba(255, 255, 255, 0.9); 
-            font-size: 18px; 
-            font-weight: bold; 
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-        }
-        .more img {
-           width: 100%;  
-           height: 100%; 
-           object-fit: cover;  
-        }
-
-        #resetButton {
-           border: none;
-           color: rgb(5, 5, 5);
-           background-color: transparent;
-           text-decoration: underline;
-           text-decoration-color: red;
-        }
-        #resetModal {
-           display: none;
-           position: fixed;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           background: rgba(255, 255, 255, 0.9);
-           padding: 20px;
-           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-           text-align: center;
-           border-radius: 10px;
-        }
-
-        #resetModal,
-        #confirmResetModal {
-           display: none;
-           position: fixed;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           background: rgba(255, 255, 255, 0.9);
-           padding: 20px;
-           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-           text-align: center;
-           border-radius: 10px;
-        }
-
-        @keyframes glowingBorder {
-            0% {
-            border-color: #000000;
-            box-shadow: 0 0 5px #240790;
-            }
-            50% {
-            border-color: #000000;
-            box-shadow: 0 0 20px #240790;
-            }
-            100% {
-            border-color: #000000;
-            box-shadow: 0 0 5px #240790;
-            }
-        }
-
-        .card-balance,
-        .form-balance {
-           border: 0px solid transparent;
-           animation: glowingBorder 5s infinite;
-        }
-        .negative-balance {
-            color: rgb(254, 3, 3); 
-            font-weight: bold;
-        }
-
-        .select-box {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .select-box.income {
-            color: green;
-        }
-
-        .select-box.expense {
-            color: red;
-        }
-
-        #chartContainer {
-            width: 800px;
-            height: 400px;
-            margin: 20px auto;
-        }
-        canvas {
-            width: 100%;
-            height: 100%;
-        }
-        #visualizeButton {
-          padding: 10px 20px;
-          font-size: 16px;
-          cursor: pointer;
-        }
-        #resetButton {
-           border: none;
-           color: rgb(5, 5, 5);
-           background-color: transparent;
-           text-decoration: underline;
-           text-decoration-color: red;
-           transition: color 0.3s, text-shadow 0.3s;
-        }
-
-        #resetButton:hover {
-           color: red; 
-           text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); 
-       }
-
-        #resetModal,
-        #confirmResetModal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            border-radius: 10px;
-            border: 2px solid transparent; /* Initial border for animation */
-            animation: borderAnimation 2s infinite; /* Border animation */
-        }
-
-        @keyframes borderAnimation {
-          0% {
-            border-color: rgba(255, 0, 0, 0.5);
-        }
-        50% {
-            border-color: rgba(255, 0, 0, 0.9);
-        }
-        100% {
-            border-color: rgba(255, 0, 0, 0.5);
-        }
-        }
-
-       #confirmResetModal {
-            border: 2px solid rgba(0, 128, 0, 0.5); 
-            animation: borderAnimation 2s infinite; 
-        }
-        
-    </style>
+    <link rel="stylesheet" href="./style.css">   
 </head>
 <body>
     <div class="appbar">
@@ -629,7 +18,7 @@
         <div class="left">
             <div id="welcome">
                 <h1 id="greeting">Good Night</h1>
-                <p id="quote">Being conscious of your flow of your money is critical. Managing it well will help you achieve your dream.</p>
+                <p id="quote">Discover the Joys of Being Money Wise.</p>
             </div>
             <div class="balance">
                 <div class="card-balance">
@@ -653,7 +42,7 @@
         <div class="right">
             <form onsubmit="submitForm(event)" class="form-balance">
                 <div class="amount-selection-row">
-                    <input name="amount" type="number" id="amount" required placeholder="Amount" class="info-input amount-input" />
+                    <input name="amount" type="number" id="amount" step="0.001" placeholder="Amount(e.g. 100)" class="info-input amount-input" required/>
                     <div class="transaction-type">  
                         <div class="radio-group">
                             <div class="radio-item">
@@ -668,10 +57,10 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <input name="information" type="text" required placeholder="Information" class="info-input" />
+                    <input name="information" type="text" required placeholder="Description(e.g. Salary)" class="info-input" />
                     <input name="date" type="date" required class="date-input" />
                 </div>
-                <input name="tag" type="text" required placeholder="Tag" class="info-input" />
+                <input name="tag" type="text" required placeholder="Tag(e.g. Teaching)" class="info-input" />
                 <button type="submit">Submit</button>
             </form>
             <div class="add">
@@ -687,7 +76,7 @@
                 </div>
                 <div class="more">
                     <button id="resetButton">
-                        <img src="./reset.png" alt="Reset Logo" width="50" height="50">
+                        <img src="./reset.png" alt="Reset Logo" width="30" height="30">
                     </button>
                 </div>
                 
@@ -699,247 +88,128 @@
             </div>
         </div>
     </div>
+    </div>
+    <div id="confirmationModal" class="modal">  <div class="modal-content">
+        <p>Are you sure you want to delete this transaction?</p>
+        <div class="modal-buttons">
+            <button id="confirmDelete" class="btn btn-danger">Yes</button>
+            <button id="cancelDelete" class="btn btn-secondary">Cancel</button>
+        </div>
+    </div>
+    </div>
     <div id="resetModal">
         <p>Do you want to reset your input?</p>
         <button id="confirmFirstReset">Yes</button>
         <button id="cancelReset">No</button>
-    </div>
-    <div id="confirmResetModal">
-        <p>Are you sure?</p>
-        <p style="color: red;">You will lose your data, and you cannot restore it back.</p>
-        <button id="confirmFinalReset">Yes</button>
-        <button id="cancelFinalReset">No</button>
     </div>
     <div id="chartContainer" style="display: none;">  
         <canvas id="balanceChart" width="400" height="300"></canvas>
         <canvas id="incomeChart" width="400" height="300"></canvas>
         <canvas id="expenseChart" width="400" height="300"></canvas>
     </div>
-    
     <script>
-        const transactionContainer = document.getElementById("transactioncontainer");
-        const balanceDisplay = document.getElementById("balance");
-        const incomeDisplay = document.getElementById("income");
-        const expenseDisplay = document.getElementById("expense");
-    
-        let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-        displayTransactions();
-       
-        function displayGreeting() {
-            const now = new Date();
-            const hours = now.getHours();
-            let greetingText = "";
-            if (hours >= 5 && hours < 12) {
-                greetingText = "Good Morning!";
-             } else if (hours >= 12 && hours < 17) {
-                greetingText = "Good Afternoon!";
-            } else if (hours >= 17 && hours < 21) {
-                greetingText = "Good Evening!";
-            } else {
-                greetingText = "Good Night!";
-            }
-            const greetingElement = document.getElementById("greeting");
-            if (greetingElement) {
-                greetingElement.innerText = greetingText;
-             }
-        }
-    
-        window.addEventListener("load", displayGreeting);
-    
-        function saveToLocalStorage() {
-        localStorage.setItem("transactions", JSON.stringify(transactions));
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+            let deleteIndex = null;
 
-        // Ensure transactions are displayed when page loads
-        window.addEventListener("load", () => { 
-            displayTransactions();
-        });
-    
-        function calculateBalance() {
-            const income = transactions
-                .filter(tx => tx.type === "Income")
-                .reduce((sum, tx) => sum + tx.amount, 0);
-            const expense = transactions
-                .filter(tx => tx.type === "Expense")
-                .reduce((sum, tx) => sum + tx.amount, 0);
-            const balance = income - expense;
+            let elements = {
+                transactionContainer: document.getElementById("transactioncontainer"),
+                balanceDisplay: document.getElementById("balance"),
+                incomeDisplay: document.getElementById("income"),
+                expenseDisplay: document.getElementById("expense"),
+                confirmationModal: document.getElementById("confirmationModal"),
+                resetModal: document.getElementById("resetModal"),
+                form: document.querySelector("form")
+            };
 
-            if (balance < 0) {
-                balanceDisplay.innerHTML = `(<span class="negative-balance">$${Math.abs(balance)}</span>)`;
-            } else {
-                balanceDisplay.textContent = `$ ${balance}`;
+            function saveToLocalStorage() {
+                localStorage.setItem("transactions", JSON.stringify(transactions));
             }
 
-            incomeDisplay.textContent = `$ ${income}`;
-            expenseDisplay.textContent = `$ ${expense}`;
-        }
+            function calculateBalance() {
+                let income = transactions.reduce((sum, tx) => tx.type === "Income" ? sum + tx.amount : sum, 0);
+                let expense = transactions.reduce((sum, tx) => tx.type === "Expense" ? sum + tx.amount : sum, 0);
+                let balance = income - expense;
 
-    
-        function displayTransactions() {
-            transactionContainer.innerHTML = "";
-            transactions.forEach((transaction, index) => {
-                const icon = transaction.type === "Income" ? "UP.png" : "down.png";
-                const backgroundColor = transaction.type === "Income" ? "green" : "red";
-                
-                const tagColor = transaction.type === "Income" ? "green" : "red";
-    
-                transactionContainer.innerHTML += `
-                    <div class="transaction" data-index="${index}">
+                elements.balanceDisplay.innerHTML = balance < 0 
+                    ? `<span class="negative-balance">(${Math.abs(balance).toFixed(2)})</span>`  
+                    : `$${balance.toFixed(2)}`;
+
+                elements.incomeDisplay.textContent = `$${income.toFixed(2)}`;
+                elements.expenseDisplay.textContent = `$${expense.toFixed(2)}`;
+            }
+
+            function displayTransactions() {
+                elements.transactionContainer.innerHTML = transactions.map((transaction, index) => `
+                    <div class="transaction" data-id="${index}">
                         <div class="front">
-                            <img src="${icon}" alt="${transaction.type}" width="24px" height="24px" />
+                            <img src="${transaction.type === "Income" ? "UP.png" : "down.png"}" alt="${transaction.type}" width="24" height="24" />
                             <p>$${transaction.amount}</p>
                         </div>
                         <div class="middle">
                             <p>${transaction.information}</p>
-                            <p id="tag" style="background-color: ${tagColor};">${transaction.tag}</p>
+                            <p class="tag" style="background-color: ${transaction.type === "Income" ? "green" : "red"};">${transaction.tag}</p>
                         </div>
                         <div class="end">${transaction.date}</div>
-                        <img class="delete-icon" src="delete.png" alt="Delete" width="24px" height="24px"/>
-                    </div>
-                `;
-            });
-    
-            
-            const deleteIcons = document.querySelectorAll(".delete-icon");
-            deleteIcons.forEach(icon => {
-                icon.addEventListener("click", function(event) {
-                    const transactionElement = event.target.closest(".transaction");
-                    const index = transactionElement.dataset.index;
-    
-                    transactions.splice(index, 1);
-                    saveToLocalStorage();
-    
-                    displayTransactions();
-                });
-            });
-    
-            calculateBalance();
-        }
-    
-        function submitForm(event) {
-            event.preventDefault();
-            const form = event.target;
-
-            // Get the transaction type from the radio buttons
-            const transactionType = document.querySelector('input[name="transaction-type"]:checked')?.value;
-
-            if (!transactionType) {  // Handle case where no radio button is selected
-                alert("Please select a transaction type.");
-                return; // Stop form submission
+                        <img class="delete-icon" src="delete.png" alt="Delete" width="24" height="24"/>
+                    </div>`).join("");
             }
 
-            transactions.unshift({
-                amount: Number(form.amount.value),
-                type: transactionType, // Use the value from radio buttons
-                information: form.information.value,
-                tag: form.tag.value,
-                date: form.date.value,
-            });
-
-            saveToLocalStorage();
-            displayTransactions();
-            form.reset();
-        }
-
-        
-        document.addEventListener("DOMContentLoaded", function () {
-            const resetButton = document.getElementById("resetButton");
-            const resetModal = document.getElementById("resetModal");
-            const confirmReset = document.getElementById("confirmReset");
-            const cancelReset = document.getElementById("cancelReset");
-
-            if (resetButton && resetModal && confirmReset && cancelReset) {
-                resetButton.addEventListener("click", function () {
-                    resetModal.style.display = "block";
-                });
-
-                cancelReset.addEventListener("click", function () {
-                    resetModal.style.display = "none";
-                });
-
-                confirmReset.addEventListener("click", function () {
-                    transactions = [];  
-                    saveToLocalStorage();
-                    displayTransactions();
-                    resetModal.style.display = "none";
-                });
-            } else {
-                console.log("One or more elements are missing.");
-            }
-        
-        });
-
-        function setupResetModal() {
-            const elements = {
-                resetButton: document.getElementById("resetButton"),
-                resetModal: document.getElementById("resetModal"),
-                confirmResetModal: document.getElementById("confirmResetModal"),
-                confirmFirstReset: document.getElementById("confirmFirstReset"),
-                confirmFinalReset: document.getElementById("confirmFinalReset"),
-                cancelReset: document.getElementById("cancelReset"),
-                cancelFinalReset: document.getElementById("cancelFinalReset"),
-            };
-
-            function toggleModal(modal, show) {
-                elements[modal].style.display = show ? "block" : "none";
-            }
-
-            function resetTransactions() {
-                localStorage.setItem("transactions", JSON.stringify([]));
-                location.reload();
-            }
-
-            elements.resetButton.addEventListener("click", () => toggleModal("resetModal", true));
-            elements.cancelReset.addEventListener("click", () => toggleModal("resetModal", false));
-            elements.confirmFirstReset.addEventListener("click", () => {
-                toggleModal("resetModal", false);
-                toggleModal("confirmResetModal", true);
-            });
-            elements.cancelFinalReset.addEventListener("click", () => toggleModal("confirmResetModal", false));
-            elements.confirmFinalReset.addEventListener("click", resetTransactions);
-        }
-
-       
-        document.addEventListener("DOMContentLoaded", setupResetModal);
-
-        document.getElementById("visualizeButton").addEventListener("click", function() {
-            console.log(transactions); 
-            localStorage.setItem("transactions", JSON.stringify(transactions));
-            window.location.href = "visualize.html";
-        });
-
-        const chartScript = document.createElement('script');
-        chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-        document.head.appendChild(chartScript);
-
-       
-        chartScript.onload = () => {
-            generateLineGraph(); 
-        };
-
-        function generateLineGraph(expenses = transactions) {  
-            const ctxBalance = document.getElementById('balanceChart').getContext('2d');
-            const ctxIncome = document.getElementById('incomeChart').getContext('2d');
-            const ctxExpense = document.getElementById('expenseChart').getContext('2d');
-
-
-            const sortedTransactions = [...expenses].sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            const balanceData = [];
-            let currentBalance = 0;
-            const incomeData = [];
-            const expenseData = [];
-
-            sortedTransactions.forEach(transaction => {
-                if (transaction.type === 'Income') {
-                    currentBalance += transaction.amount;
-                    incomeData.push({ x: transaction.date, y: transaction.amount });
-                } else {
-                    currentBalance -= transaction.amount;
-                    expenseData.push({ x: transaction.date, y: transaction.amount }); // Positive for chart display
+            elements.transactionContainer.addEventListener("click", function (event) {
+                let transactionEl = event.target.closest(".transaction");
+                if (event.target.classList.contains("delete-icon") && transactionEl) {
+                    deleteIndex = transactionEl.getAttribute("data-id");
+                    elements.confirmationModal.style.display = "flex";
                 }
-                balanceData.push({ x: transaction.date, y: currentBalance });
-            });}
-    </script>  
+            });
+
+            document.getElementById("confirmDelete").addEventListener("click", function () {
+                if (deleteIndex !== null) {
+                    transactions.splice(deleteIndex, 1);
+                    saveToLocalStorage();
+                    displayTransactions();
+                    calculateBalance();
+                }
+                elements.confirmationModal.style.display = "none";
+                deleteIndex = null;
+            });
+
+            document.getElementById("cancelDelete").addEventListener("click", () => elements.confirmationModal.style.display = "none");
+
+            elements.form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                let form = event.target;
+                let transactionType = form.querySelector('input[name="transaction-type"]:checked')?.value;
+                if (!transactionType) return alert("Please select a transaction type.");
+
+                transactions.unshift({
+                    amount: Number(form.amount.value),
+                    type: transactionType,
+                    information: form.information.value,
+                    tag: form.tag.value,
+                    date: form.date.value,
+                });
+
+                saveToLocalStorage();
+                displayTransactions();
+                calculateBalance();
+                form.reset();
+            });
+
+            document.getElementById("resetButton").addEventListener("click", () => elements.resetModal.style.display = "flex");
+            document.getElementById("confirmFirstReset").addEventListener("click", function () {
+                transactions = [];
+                saveToLocalStorage();
+                displayTransactions();
+                calculateBalance();
+                elements.resetModal.style.display = "none";
+            });
+            document.getElementById("cancelReset").addEventListener("click", () => elements.resetModal.style.display = "none");
+
+            displayTransactions();
+            calculateBalance();
+        });
+
+    </script>
 </body>
 </html>
