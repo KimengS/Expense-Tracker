@@ -21,7 +21,7 @@
                 <p id="quote">Discover the Joys of Being Money Wise.</p>
             </div>
             <div class="balance">
-                <div class="card-balance">
+                <div class="card-balance" id="balance-card">
                     <h5>Balance</h5>
                     <h3 id="balance">$ 0.00</h3>
                 </div>
@@ -60,7 +60,7 @@
                     <input name="information" type="text" required placeholder="Description(e.g. Salary)" class="info-input" />
                     <input name="date" type="date" required class="date-input" />
                 </div>
-                <input name="tag" type="text" required placeholder="Tag(e.g. Teaching)" class="info-input" />
+                <input name="tag" type="text" placeholder="Tag(e.g. Teaching)" class="info-input" />
                 <button type="submit">Submit</button>
             </form>
             <div class="add">
@@ -121,6 +121,26 @@
                 resetModal: document.getElementById("resetModal"),
                 form: document.querySelector("form")
             };
+            function displayGreeting() {
+                const now = new Date();
+                const hours = now.getHours();
+                let greetingText = "";
+                if (hours >= 5 && hours < 12) {
+                    greetingText = "Good Morning!";
+                } else if (hours >= 12 && hours < 17) {
+                    greetingText = "Good Afternoon!";
+                } else if (hours >= 17 && hours < 21) {
+                    greetingText = "Good Evening!";
+                } else {
+                    greetingText = "Good Night!";
+                }
+                const greetingElement = document.getElementById("greeting");
+                if (greetingElement) {
+                    greetingElement.innerText = greetingText;
+                }
+            }
+    
+            window.addEventListener("load", displayGreeting);
 
             function saveToLocalStorage() {
                 localStorage.setItem("transactions", JSON.stringify(transactions));
