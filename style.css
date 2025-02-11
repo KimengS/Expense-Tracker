@@ -92,7 +92,7 @@ body {
 #quote {
     margin-top: -25px; 
 }
-/*.balance {
+.balance {
     display: flex;
     gap: 16px;
     margin-top: 20px;
@@ -114,39 +114,6 @@ body {
 .card-balance:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}*/
-.balance {
-    display: flex;
-    gap: 16px;
-    margin-top: 20px;
-    flex-wrap: wrap; /* Keep this for wrapping if needed */
-}
-
-.card-balance {
-    border-radius: 8px;
-    /* Remove flex: 1; from here */
-    background-color: rgba(255, 255, 255, 0.521);
-    padding: 10px;
-    text-align: center;
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #000000;
-}
-
-.card-balance:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-#balance-card { 
-    width: 100%; 
-    flex: 0 0 auto; 
-}
-
-.card-balance:not(#balance-card) { 
-    flex: 1;
 }
 .form-balance {
     display: flex;

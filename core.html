@@ -61,7 +61,7 @@
                     <input name="date" type="date" required class="date-input" />
                 </div>
                 <input name="tag" type="text" placeholder="Tag(e.g. Teaching)" class="info-input" />
-                <button type="submit">Submit</button>
+                <button type="submit" onclick="audio.play();">Submit</button>
             </form>
             <div class="add">
                 <div class="more">
@@ -158,6 +158,7 @@
                 elements.incomeDisplay.textContent = `$${income.toFixed(2)}`;
                 elements.expenseDisplay.textContent = `$${expense.toFixed(2)}`;
             }
+            const audio = new Audio("./submitsound.mp3")
 
             function displayTransactions() {
                 elements.transactionContainer.innerHTML = transactions.map((transaction, index) => `
