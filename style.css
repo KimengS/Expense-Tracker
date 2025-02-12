@@ -149,13 +149,14 @@ form-balance input,
     padding: 5px;
     transition: border-color 0.3s ease;
 }
+
 .font input:focus {
     border-color: #2575fc;
 }
 
 .form-balance button {
     height: 45px;
-    width: 150px;
+    max-width: max-content;
     background: linear-gradient(45deg, #000000, #2575fc);
     color: white;
     border: none;
@@ -164,6 +165,7 @@ form-balance input,
     font-size: 16px;
     transition: transform 0.2s, box-shadow 0.2s;
     align-self: center;
+    padding: 10px;
 }
 
 .form-balance button:hover {
@@ -354,6 +356,7 @@ form-balance input,
     justify-content: flex-end;
     padding: 5px;
 }
+
 
 
 @keyframes border-pulse {
@@ -552,7 +555,7 @@ canvas {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4); 
-    z-index: 1050;
+    z-index: 10;
     justify-content: center;
     align-items: center;
     
@@ -564,7 +567,8 @@ canvas {
     border: 1px solid #888;
     border-radius: 5px;
     text-align: center;
-    width: 20%;
+    width: fit-content;
+    max-width: 70%;
 }
 
 .modal-buttons {
